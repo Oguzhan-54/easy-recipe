@@ -47,7 +47,3 @@
 .output {
   margin-top: var(--space-lg);
 }
-
-.loading {
-  color: var(--color-text-muted);
-}

@@ -58,11 +58,58 @@
   gap: var(--space-sm);
 }
 
+.imageWrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+}
+
 .image {
   width: 100%;
   max-height: 20rem;
   object-fit: cover;
-  border-radius: var(--radius);
+}
+
+/* Scanner effect: slightly darkened photo + a glowing line moving up and down */
+.scan {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 0.15);
+  animation: fade-in 0.3s ease-out;
+}
+
+.scan::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3rem;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgb(255 255 255 / 0.45) 85%,
+    #ffffff
+  );
+  box-shadow: 0 2px 12px 2px rgb(255 255 255 / 0.8);
+  animation: scan 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes scan {
+  from {
+    top: -3rem;
+  }
+  to {
+    top: 100%;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .changeButton {
