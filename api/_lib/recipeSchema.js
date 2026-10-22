@@ -35,9 +35,11 @@ export const recipeSchema = {
         type: 'object',
         properties: {
           number: { type: 'integer' },
+          // Short heading for the step, e.g. "Wasser aufkochen"
+          title: { type: 'string' },
           text: { type: 'string' },
         },
-        required: ['number', 'text'],
+        required: ['number', 'title', 'text'],
       },
     },
     notes: { type: ['string', 'null'] },
