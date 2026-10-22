@@ -1,0 +1,64 @@
+/* Mobile: fixed bar at the bottom, copy button (icon only) left, main button right */
+.actions {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--gutter);
+  /* Extra space for the home bar on iPhones */
+  padding-bottom: max(var(--space-sm), env(safe-area-inset-bottom));
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+}
+
+.newButton {
+  flex: 1;
+  order: 2;
+}
+
+/* Square icon button on phones (".actions" in front = stronger than the Button's own padding) */
+.actions .copyButton {
+  order: 1;
+  padding-inline: 0.875rem;
+}
+
+.desktopOnly {
+  display: none;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Desktop: normal buttons below the recipe title */
+@media (min-width: 48rem) {
+  .actions {
+    position: static;
+    flex-wrap: wrap;
+    padding: 0;
+    border-top: none;
+    background: none;
+  }
+
+  .newButton {
+    flex: none;
+    order: 1;
+  }
+
+  .actions .copyButton {
+    order: 2;
+    padding-inline: 1.5rem;
+  }
+
+  .desktopOnly {
+    display: inline;
+  }
+}

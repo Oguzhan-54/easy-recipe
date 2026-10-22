@@ -1,11 +1,14 @@
 .loading {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
-  padding: var(--space-lg) var(--space-md);
+  justify-content: center;
+  gap: var(--space-xl);
+  height: 100%;
+  padding: var(--space-xl) var(--space-lg);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
 }
 
 /* Visible only for screen readers */
@@ -26,7 +29,10 @@
 
 .message {
   margin: 0;
-  font-weight: 600;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   animation: fade-in 0.4s ease-out;
 }
 
@@ -80,7 +86,7 @@
 
 .steam path {
   fill: none;
-  stroke: var(--color-text-muted);
+  stroke: var(--color-primary-border);
   stroke-width: 2.5;
   stroke-linecap: round;
   opacity: 0;
@@ -102,7 +108,7 @@
     transform: translateY(6px);
   }
   30% {
-    opacity: 0.8;
+    opacity: 0.9;
   }
   100% {
     opacity: 0;
@@ -120,12 +126,12 @@
 
 .bone {
   border-radius: 0.375rem;
-  /* A light stripe moves over a grey background = "shimmer" */
+  /* A light stripe moves over a grey-green background = "shimmer" */
   background: linear-gradient(
     90deg,
-    var(--color-border) 25%,
-    #f7f1ea 50%,
-    var(--color-border) 75%
+    var(--color-primary-soft) 25%,
+    #f9fbfa 50%,
+    var(--color-primary-soft) 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.4s linear infinite;
@@ -142,7 +148,7 @@
 
 .title {
   width: 60%;
-  height: 1.5rem;
+  height: 1.75rem;
 }
 
 .line {
@@ -151,21 +157,17 @@
   margin-bottom: var(--space-sm);
 }
 
+/* Three "chips" like time / servings / difficulty in the result */
 .facts {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   gap: var(--space-sm);
   margin-bottom: var(--space-sm);
 }
 
-@media (min-width: 32rem) {
-  .facts {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 .fact {
-  height: 3.25rem;
+  width: 5.5rem;
+  height: 2rem;
+  border-radius: 999px;
 }
 
 .row {

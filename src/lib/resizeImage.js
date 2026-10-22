@@ -3,7 +3,7 @@
 
 export const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp']
 // Upper limit for the original file (before resizing), protects the browser from huge files
-const MAX_FILE_SIZE = 20 * 1024 * 1024
+const MAX_FILE_SIZE = 10 * 1024 * 1024
 // Longest side after resizing – enough for Gemini to recognize a dish
 const MAX_DIMENSION = 1024
 const OUTPUT_TYPE = 'image/jpeg'
@@ -15,7 +15,7 @@ export function validateImageFile(file) {
     return 'Bitte ein Foto im Format JPG, PNG oder WebP auswählen.'
   }
   if (file.size > MAX_FILE_SIZE) {
-    return 'Das Foto ist zu groß (maximal 20 MB).'
+    return 'Das Foto ist zu groß (maximal 10 MB).'
   }
   return null
 }

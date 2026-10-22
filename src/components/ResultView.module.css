@@ -1,82 +1,108 @@
-.recipe {
-  display: flex;
-  flex-direction: column;
+.page {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  /* Bottom: room for the fixed button bar on phones */
+  padding: var(--space-md) var(--gutter) 7rem;
+}
+
+.top {
+  display: grid;
   gap: var(--space-lg);
-  padding: var(--space-lg) var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
 }
 
 .dishName {
-  margin: 0 0 var(--space-xs);
+  margin: 0 0 var(--space-md);
+  font-size: clamp(2.25rem, 8vw, 3rem);
+  font-weight: 800;
 }
 
 .description {
-  margin: 0;
+  margin: 0 0 var(--space-lg);
+  font-size: 1.0625rem;
   color: var(--color-text-muted);
 }
 
-.facts {
-  display: grid;
-  /* 2 columns on phones, 4 next to each other on wider screens */
-  grid-template-columns: repeat(2, 1fr);
+/* Mobile: no space below, the buttons are in the fixed bar at the bottom */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--space-sm);
   margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-@media (min-width: 32rem) {
-  .facts {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-.fact {
-  padding: var(--space-sm);
-  border-radius: var(--radius);
-  background-color: var(--color-bg);
-  text-align: center;
-}
-
-.factLabel {
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.factValue {
-  margin: 0;
-  font-weight: 600;
-}
-
-.notes {
-  padding: var(--space-sm) var(--space-md);
-  border-left: 4px solid var(--color-primary);
-  background-color: var(--color-bg);
-}
-
-.notesHeading {
-  margin: 0 0 var(--space-xs);
-  font-size: 1rem;
-}
-
-.notesText {
-  margin: 0;
-}
-
-.notFood {
-  padding: var(--space-md);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d9d5c8;
+  border-radius: 999px;
   background-color: var(--color-surface);
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.notFoodTitle {
-  margin: 0 0 var(--space-xs);
-  font-size: 1.25rem;
+.chipAccent {
+  border-color: var(--color-accent-soft);
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent-text);
 }
 
-.notFood p {
-  margin: 0;
+.columns {
+  display: grid;
+  align-items: start;
+  gap: var(--space-lg);
+}
+
+.notes,
+.disclaimer {
+  margin: var(--space-lg) 0 0;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* Desktop: photo next to the summary, ingredients next to the steps */
+@media (min-width: 48rem) {
+  .page {
+    padding-bottom: var(--space-2xl);
+  }
+
+  .top {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+
+  .photo {
+    aspect-ratio: 4 / 3;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .chips {
+    margin-bottom: var(--space-lg);
+  }
+
+  .chip {
+    padding: 0.375rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+
+  .columns {
+    grid-template-columns: 1fr 1fr;
+  }
 }

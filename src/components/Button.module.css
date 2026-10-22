@@ -1,0 +1,59 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.md {
+  padding: 0.625rem 1.125rem;
+  font-size: 0.9375rem;
+}
+
+.lg {
+  padding: 0.875rem 1.5rem;
+  font-size: 1rem;
+}
+
+/* Square button that only contains an icon */
+.icon {
+  padding: 0.875rem;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+.outline {
+  border-color: var(--color-primary);
+  background-color: var(--color-surface);
+  color: var(--color-primary-hover);
+}
+
+.outline:hover:not(:disabled) {
+  background-color: var(--color-primary-soft);
+}

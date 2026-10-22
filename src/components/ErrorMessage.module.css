@@ -1,25 +1,37 @@
-.error {
+.message {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
-  border: 1px solid var(--color-error);
-  border-radius: var(--radius);
-  background-color: #fef2f2;
+  border: 1px solid;
+  border-radius: var(--radius-sm);
+  font-size: 0.9375rem;
+}
+
+.error {
+  border-color: var(--color-error);
+  background-color: var(--color-error-soft);
   color: var(--color-error);
 }
 
-.message {
+.info {
+  border-color: var(--color-border);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.text {
   margin: 0;
 }
 
 .retry {
   padding: var(--space-xs) var(--space-md);
-  border: 1px solid var(--color-error);
-  border-radius: var(--radius);
+  border: 1px solid currentColor;
+  border-radius: var(--radius-sm);
   background-color: var(--color-surface);
-  color: var(--color-error);
+  color: inherit;
+  font-weight: 600;
   cursor: pointer;
 }

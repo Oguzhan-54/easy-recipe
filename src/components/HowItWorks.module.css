@@ -1,0 +1,89 @@
+.section {
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--gutter);
+}
+
+.heading {
+  margin: 0 0 var(--space-xl);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+}
+
+/* Mobile: cards below each other, desktop: three next to each other */
+.list {
+  display: grid;
+  gap: var(--space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step {
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-bg);
+}
+
+.imageWrapper {
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* Step number as a badge in the top left corner of the photo */
+.number {
+  position: absolute;
+  top: var(--space-md);
+  left: var(--space-md);
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.625rem;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgb(27 42 34 / 0.25);
+}
+
+.body {
+  padding: var(--space-md) var(--space-lg) var(--space-lg);
+}
+
+.title {
+  margin: 0 0 var(--space-xs);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.text {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 48rem) {
+  .list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+
+  .title {
+    font-size: 1.0625rem;
+  }
+
+  .text {
+    font-size: 0.9375rem;
+  }
+}

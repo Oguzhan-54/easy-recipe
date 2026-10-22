@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react'
 import styles from './LoadingState.module.css'
 
 // Rough stages of what the AI does. They are not real progress, just a hint that work is going on.
+// The space before "…" is a non-breaking space (U+00A0), so the "…" never wraps into its own line
 const MESSAGES = [
-  'Foto wird angeschaut …',
-  'Zutaten werden erkannt …',
-  'Mengen werden geschätzt …',
-  'Rezept wird geschrieben …',
+  'Foto wird angeschaut …',
+  'Zutaten werden erkannt …',
+  'Mengen werden geschätzt …',
+  'Rezept wird geschrieben …',
 ]
 const MESSAGE_INTERVAL_MS = 2500
 
@@ -44,7 +45,7 @@ function LoadingState() {
         <div className={`${styles.bone} ${styles.title}`} />
         <div className={`${styles.bone} ${styles.line}`} />
         <div className={styles.facts}>
-          {[1, 2, 3, 4].map((n) => (
+          {[1, 2, 3].map((n) => (
             <div key={n} className={`${styles.bone} ${styles.fact}`} />
           ))}
         </div>

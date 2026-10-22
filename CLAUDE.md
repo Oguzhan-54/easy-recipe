@@ -129,7 +129,7 @@ Kein Fließtext.
     { "name": "Eier", "amount": 2, "unit": "Stück" }
   ],
   "steps": [
-    { "number": 1, "text": "Wasser salzen und zum Kochen bringen." }
+    { "number": 1, "title": "Wasser aufkochen", "text": "Wasser salzen und zum Kochen bringen." }
   ],
   "notes": "Optionale Hinweise, z. B. Varianten oder Unsicherheiten."
 }

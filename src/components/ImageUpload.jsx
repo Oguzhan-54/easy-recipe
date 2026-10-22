@@ -1,8 +1,13 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { ALLOWED_TYPES } from '../lib/resizeImage.js'
+import Button from './Button.jsx'
+import { IconCamera, IconUpload } from './icons.jsx'
 import styles from './ImageUpload.module.css'
 
-// Upload area: click to choose a file (on phones also the camera) or drag & drop a photo.
+const ACCEPT = ALLOWED_TYPES.join(',')
+
+// Upload area. Desktop: drag & drop or "Foto auswählen".
+// Mobile: "Foto aufnehmen" (opens the camera directly) or "Aus Galerie wählen".
 // After selecting, it shows a preview instead.
 function ImageUpload({
   previewUrl,
@@ -12,6 +17,9 @@ function ImageUpload({
   isScanning,
 }) {
   const [isDragging, setIsDragging] = useState(false)
+  // References to the hidden file inputs, so our own buttons can open them
+  const galleryInputRef = useRef(null)
+  const cameraInputRef = useRef(null)
 
   function handleChange(event) {
     const file = event.target.files[0]
@@ -63,27 +71,71 @@ function ImageUpload({
   }
 
   return (
-    // A <label> around the input: clicking anywhere in the area opens the file dialog
-    <label
+    <div
       className={`${styles.dropzone} ${isDragging ? styles.dragging : ''}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
+      {/* Hidden inputs – they are opened by the buttons below */}
       <input
+        ref={galleryInputRef}
         type="file"
-        accept={ALLOWED_TYPES.join(',')}
-        className={styles.input}
+        accept={ACCEPT}
         onChange={handleChange}
-        disabled={disabled}
+        hidden
       />
-      <span className={styles.icon} aria-hidden="true">
-        📷
+      {/* capture="environment" opens the back camera on phones */}
+      <input
+        ref={cameraInputRef}
+        type="file"
+        accept={ACCEPT}
+        capture="environment"
+        onChange={handleChange}
+        hidden
+      />
+
+      <span className={styles.icon}>
+        <IconUpload size={22} />
       </span>
-      <span className={styles.title}>Foto hierher ziehen</span>
-      <span className={styles.hint}>oder klicken, um ein Foto auszuwählen</span>
-      <span className={styles.formats}>JPG, PNG oder WebP</span>
-    </label>
+      <p className={styles.title}>
+        <span className={styles.desktopOnly}>Zieh dein Essensfoto hierher</span>
+        <span className={styles.mobileOnly}>Essensfoto hinzufügen</span>
+      </p>
+      <p className={styles.formats}>JPG, PNG oder WebP, bis 10 MB</p>
+
+      <div className={styles.buttons}>
+        <Button
+          variant="outline"
+          className={styles.mobileOnly}
+          onClick={() => cameraInputRef.current.click()}
+          disabled={disabled}
+          fullWidth
+          size="lg"
+        >
+          <IconCamera size={20} />
+          Foto aufnehmen
+        </Button>
+        <Button
+          variant="outline"
+          className={styles.mobileOnly}
+          onClick={() => galleryInputRef.current.click()}
+          disabled={disabled}
+          fullWidth
+          size="lg"
+        >
+          Aus Galerie wählen
+        </Button>
+        <Button
+          variant="outline"
+          className={styles.desktopOnly}
+          onClick={() => galleryInputRef.current.click()}
+          disabled={disabled}
+        >
+          Foto auswählen
+        </Button>
+      </div>
+    </div>
   )
 }
 

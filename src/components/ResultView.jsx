@@ -1,67 +1,86 @@
 import {
-  formatConfidence,
   formatDifficulty,
   formatDuration,
+  formatServings,
 } from '../lib/formatRecipe.js'
 import IngredientList from './IngredientList.jsx'
+import ResultActions from './ResultActions.jsx'
 import StepList from './StepList.jsx'
+import { IconClock, IconDifficulty, IconUsers } from './icons.jsx'
 import styles from './ResultView.module.css'
 
-// Shows the recognized recipe in sections instead of raw JSON.
-function ResultView({ recipe }) {
-  if (!recipe.isFood) {
-    return (
-      <div className={styles.notFood}>
-        <h2 className={styles.notFoodTitle}>Kein Gericht erkannt</h2>
-        <p>
-          Auf dem Foto konnte kein Essen erkannt werden. Probier es mit einem
-          anderen Foto, auf dem das Gericht gut zu sehen ist.
-        </p>
-      </div>
-    )
-  }
-
-  // Only show facts the AI actually returned (null values are left out)
-  const facts = [
-    { label: 'Portionen', value: recipe.servings },
-    { label: 'Dauer', value: formatDuration(recipe.durationMinutes) },
-    { label: 'Schwierigkeit', value: formatDifficulty(recipe.difficulty) },
-    { label: 'Erkennung', value: formatConfidence(recipe.confidence) },
-  ].filter((fact) => fact.value)
+// Result page: photo + summary at the top, ingredients and steps below.
+function ResultView({ recipe, previewUrl, onNewPhoto }) {
+  const duration = formatDuration(recipe.durationMinutes)
+  const servings = formatServings(recipe.servings)
+  const difficulty = formatDifficulty(recipe.difficulty)
 
   return (
-    <article className={styles.recipe}>
-      <header>
-        <h2 className={styles.dishName}>{recipe.dishName}</h2>
-        {recipe.description && (
-          <p className={styles.description}>{recipe.description}</p>
+    <div className={styles.page}>
+      <section className={styles.top}>
+        {previewUrl && (
+          <img
+            src={previewUrl}
+            alt="Dein hochgeladenes Foto"
+            className={styles.photo}
+          />
         )}
-      </header>
 
-      {facts.length > 0 && (
-        // <dl> = description list: a list of label/value pairs
-        <dl className={styles.facts}>
-          {facts.map((fact) => (
-            <div key={fact.label} className={styles.fact}>
-              <dt className={styles.factLabel}>{fact.label}</dt>
-              <dd className={styles.factValue}>{fact.value}</dd>
-            </div>
-          ))}
-        </dl>
-      )}
+        <div className={styles.summary}>
+          <h1 className={styles.dishName}>{recipe.dishName}</h1>
+          {recipe.description && (
+            <p className={styles.description}>{recipe.description}</p>
+          )}
 
-      {recipe.ingredients.length > 0 && (
-        <IngredientList ingredients={recipe.ingredients} />
-      )}
-      {recipe.steps.length > 0 && <StepList steps={recipe.steps} />}
+          <ul className={styles.chips} aria-label="Eckdaten">
+            {duration && (
+              <li className={`${styles.chip} ${styles.chipAccent}`}>
+                <IconClock size={16} />
+                {duration}
+              </li>
+            )}
+            {servings && (
+              <li className={styles.chip}>
+                <IconUsers size={16} />
+                {servings}
+              </li>
+            )}
+            {difficulty && (
+              <li className={styles.chip}>
+                <IconDifficulty size={16} />
+                {difficulty}
+              </li>
+            )}
+            {/* Only shown when the AI was not sure – otherwise it is not worth the space */}
+            {recipe.confidence === 'low' && (
+              <li className={styles.chip}>Unsicher erkannt</li>
+            )}
+          </ul>
+
+          <ResultActions recipe={recipe} onNewPhoto={onNewPhoto} />
+        </div>
+      </section>
+
+      <div className={styles.columns}>
+        {recipe.ingredients.length > 0 && (
+          <IngredientList
+            ingredients={recipe.ingredients}
+            servings={recipe.servings}
+          />
+        )}
+        {recipe.steps.length > 0 && <StepList steps={recipe.steps} />}
+      </div>
 
       {recipe.notes && (
-        <aside className={styles.notes}>
-          <h3 className={styles.notesHeading}>Hinweise</h3>
-          <p className={styles.notesText}>{recipe.notes}</p>
-        </aside>
+        <p className={styles.notes}>
+          <strong>Hinweis:</strong> {recipe.notes}
+        </p>
       )}
-    </article>
+      <p className={styles.disclaimer}>
+        Per KI aus deinem Foto erstellt. Mengen und Zeiten sind Schätzungen,
+        passe sie nach Geschmack an.
+      </p>
+    </div>
   )
 }
 

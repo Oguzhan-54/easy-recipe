@@ -1,56 +1,75 @@
 .dropzone {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-xs);
-  padding: var(--space-xl) var(--space-md);
-  border: 2px dashed var(--color-border);
+  padding: var(--space-lg) var(--space-md);
+  border: 2px dashed var(--color-primary-border);
   border-radius: var(--radius);
-  background-color: var(--color-surface);
+  background-color: var(--color-primary-soft);
   text-align: center;
-  cursor: pointer;
   transition:
     border-color 0.15s,
     background-color 0.15s;
 }
 
-.dropzone:hover,
 .dragging {
   border-color: var(--color-primary);
-  background-color: #fff3ea;
-}
-
-/* The input is hidden visually, but stays focusable for keyboard users */
-.input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  opacity: 0;
-}
-
-/* Show the focus ring on the whole area when the hidden input is focused */
-.dropzone:focus-within {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 2px;
+  background-color: #e1eee5;
 }
 
 .icon {
-  font-size: 2.5rem;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: var(--space-sm);
+  border-radius: 50%;
+  background-color: #e1ece4;
+  color: var(--color-primary);
 }
 
 .title {
+  margin: 0;
   font-weight: 600;
 }
 
-.hint,
 .formats {
+  margin: var(--space-xs) 0 var(--space-md);
+  font-size: 0.8125rem;
   color: var(--color-text-muted);
 }
 
-.formats {
-  font-size: 0.875rem;
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
 }
+
+/* Show different texts/buttons on phones and desktops (see design) */
+.desktopOnly {
+  display: none !important;
+}
+
+@media (min-width: 48rem) {
+  .dropzone {
+    padding: var(--space-xl) var(--space-md);
+  }
+
+  .buttons {
+    align-items: center;
+  }
+
+  .desktopOnly {
+    display: inline-flex !important;
+  }
+
+  .mobileOnly {
+    display: none !important;
+  }
+}
+
+/* ---------- Preview of the selected photo ---------- */
 
 .preview {
   display: flex;
@@ -66,15 +85,31 @@
 
 .image {
   width: 100%;
-  max-height: 20rem;
+  max-height: 18rem;
   object-fit: cover;
+}
+
+.changeButton {
+  align-self: flex-start;
+  padding: var(--space-xs) 0;
+  border: none;
+  background: none;
+  color: var(--color-primary-hover);
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.changeButton:disabled {
+  color: var(--color-text-muted);
+  cursor: not-allowed;
 }
 
 /* Scanner effect: slightly darkened photo + a glowing line moving up and down */
 .scan {
   position: absolute;
   inset: 0;
-  background-color: rgb(0 0 0 / 0.15);
+  background-color: rgb(27 42 34 / 0.2);
   animation: fade-in 0.3s ease-out;
 }
 
@@ -87,10 +122,10 @@
   background: linear-gradient(
     to bottom,
     transparent,
-    rgb(255 255 255 / 0.45) 85%,
+    rgb(238 245 240 / 0.5) 85%,
     #ffffff
   );
-  box-shadow: 0 2px 12px 2px rgb(255 255 255 / 0.8);
+  box-shadow: 0 2px 14px 2px rgb(134 173 149 / 0.9);
   animation: scan 2.2s ease-in-out infinite alternate;
 }
 
@@ -110,19 +145,4 @@
   to {
     opacity: 1;
   }
-}
-
-.changeButton {
-  align-self: flex-start;
-  padding: var(--space-xs) 0;
-  border: none;
-  background: none;
-  color: var(--color-primary);
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.changeButton:disabled {
-  color: var(--color-text-muted);
-  cursor: not-allowed;
 }
