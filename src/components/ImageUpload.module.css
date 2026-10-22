@@ -1,0 +1,81 @@
+.dropzone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xl) var(--space-md);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s;
+}
+
+.dropzone:hover,
+.dragging {
+  border-color: var(--color-primary);
+  background-color: #fff3ea;
+}
+
+/* The input is hidden visually, but stays focusable for keyboard users */
+.input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* Show the focus ring on the whole area when the hidden input is focused */
+.dropzone:focus-within {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.icon {
+  font-size: 2.5rem;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.hint,
+.formats {
+  color: var(--color-text-muted);
+}
+
+.formats {
+  font-size: 0.875rem;
+}
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.image {
+  width: 100%;
+  max-height: 20rem;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.changeButton {
+  align-self: flex-start;
+  padding: var(--space-xs) 0;
+  border: none;
+  background: none;
+  color: var(--color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.changeButton:disabled {
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
