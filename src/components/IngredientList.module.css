@@ -1,33 +1,90 @@
-.heading {
-  margin: 0;
+.card {
+  padding: var(--space-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
 }
 
+.header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.heading {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.servingsShort {
+  color: var(--color-text-muted);
+}
+
+/* Mobile: only the short "Für 2", desktop: the full hint below the heading */
 .hint {
-  margin: var(--space-xs) 0 var(--space-sm);
-  font-size: 0.875rem;
+  display: none;
+  margin: var(--space-sm) 0 0;
+  font-size: 0.8125rem;
   color: var(--color-text-muted);
 }
 
 .list {
-  margin: 0;
+  margin: var(--space-md) 0 0;
   padding: 0;
   list-style: none;
 }
 
 .item {
-  display: grid;
-  /* Fixed column for amounts, so all ingredient names start at the same position */
-  grid-template-columns: 6.5rem 1fr;
-  gap: var(--space-sm);
-  padding: var(--space-sm) 0;
-  border-bottom: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
 }
 
-.item:last-child {
-  border-bottom: none;
+.label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: 0.875rem 0;
+  cursor: pointer;
 }
 
-.amount {
-  font-weight: 600;
-  text-align: right;
+/* Own checkbox look: rounded square, green with a white tick when checked */
+.checkbox {
+  appearance: none;
+  flex-shrink: 0;
+  width: 1.375rem;
+  height: 1.375rem;
+  margin: 0.0625rem 0 0;
+  border: 1.5px solid #8a918d;
+  border-radius: 0.3rem;
+  background-color: var(--color-surface);
+  cursor: pointer;
+}
+
+.checkbox:checked {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 5 5 9-10'/%3E%3C/svg%3E");
+  background-position: center;
+  background-size: 80%;
+  background-repeat: no-repeat;
+}
+
+/* Checked ingredients are crossed out ("+" = the element right after the checkbox) */
+.checkbox:checked + .text {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+@media (min-width: 48rem) {
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  .servingsShort {
+    display: none;
+  }
+
+  .hint {
+    display: block;
+  }
 }

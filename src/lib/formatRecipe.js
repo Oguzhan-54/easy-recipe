@@ -33,8 +33,40 @@ export function formatDuration(minutes) {
   return rest ? `${hours} Std. ${rest} Min.` : `${hours} Std.`
 }
 
+export function formatServings(servings) {
+  if (!servings) return null
+  return servings === 1 ? '1 Portion' : `${servings} Portionen`
+}
+
 // "200 g", "2 Stück" or "" for amounts like "a pinch of salt" (amount = null)
 export function formatAmount(amount, unit) {
   if (amount == null) return unit ?? ''
   return [numberFormat.format(amount), unit].filter(Boolean).join(' ')
+}
+
+// The whole recipe as plain text, e.g. for copying it into a notes app
+export function recipeToText(recipe) {
+  const facts = [
+    formatDuration(recipe.durationMinutes),
+    formatServings(recipe.servings),
+    formatDifficulty(recipe.difficulty),
+  ].filter(Boolean)
+
+  const lines = [recipe.dishName]
+  if (recipe.description) lines.push(recipe.description)
+  if (facts.length > 0) lines.push(facts.join(' · '))
+
+  lines.push('', 'Zutaten')
+  for (const ingredient of recipe.ingredients) {
+    const amount = formatAmount(ingredient.amount, ingredient.unit)
+    lines.push(`- ${[amount, ingredient.name].filter(Boolean).join(' ')}`)
+  }
+
+  lines.push('', 'Zubereitung')
+  for (const step of recipe.steps) {
+    const title = step.title ? `${step.title}: ` : ''
+    lines.push(`${step.number}. ${title}${step.text}`)
+  }
+
+  return lines.join('\n')
 }

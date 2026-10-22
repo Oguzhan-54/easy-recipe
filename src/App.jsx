@@ -1,12 +1,10 @@
-import { useState } from 'react'
-import DescriptionInput from './components/DescriptionInput.jsx'
-import ErrorMessage from './components/ErrorMessage.jsx'
-import ImageUpload from './components/ImageUpload.jsx'
-import LoadingState from './components/LoadingState.jsx'
+import { useEffect, useState } from 'react'
+import Footer from './components/Footer.jsx'
+import Header from './components/Header.jsx'
 import ResultView from './components/ResultView.jsx'
+import StartView from './components/StartView.jsx'
 import { useAnalyzeImage } from './hooks/useAnalyzeImage.js'
 import { resizeImage, validateImageFile } from './lib/resizeImage.js'
-import styles from './App.module.css'
 
 function App() {
   // The already resized image: { base64, mimeType, previewUrl }
@@ -16,6 +14,13 @@ function App() {
   const { status, result, error, analyze, reset } = useAnalyzeImage()
 
   const isLoading = status === 'loading'
+  // Two "pages" without a router: the result page replaces the start page
+  const showResult = status === 'success' && result.isFood
+
+  // Start the result page at the top, not where the user scrolled to before
+  useEffect(() => {
+    window.scrollTo({ top: 0 })
+  }, [showResult])
 
   async function handleFileSelect(file) {
     reset()
@@ -37,7 +42,7 @@ function App() {
     }
   }
 
-  function handleClear() {
+  function handleClearImage() {
     setImage(null)
     reset()
   }
@@ -50,54 +55,56 @@ function App() {
     })
   }
 
+  // Back to an empty start page
+  function handleNewPhoto() {
+    setImage(null)
+    setDescription('')
+    setUploadError(null)
+    reset()
+  }
+
+  // At most one message is shown in the upload card
+  let message = null
+  if (uploadError) {
+    message = { text: uploadError, tone: 'error' }
+  } else if (status === 'error') {
+    message = {
+      text: error.message,
+      tone: 'error',
+      onRetry: error.retryable ? handleAnalyze : undefined,
+    }
+  } else if (status === 'success' && !result.isFood) {
+    message = {
+      text: 'Auf dem Foto konnte kein Essen erkannt werden. Probier es mit einem anderen Foto, auf dem das Gericht gut zu sehen ist.',
+      tone: 'info',
+    }
+  }
+
   return (
-    <main className={styles.app}>
-      <header className={styles.header}>
-        <h1 className={styles.title}>EasyRecipe</h1>
-        <p className={styles.subtitle}>
-          Lade ein Foto von einem Gericht hoch und erhalte Zutaten, Rezept und
-          Anleitung.
-        </p>
-      </header>
-
-      <section className={styles.form} aria-label="Foto hochladen">
-        <ImageUpload
-          previewUrl={image?.previewUrl}
-          onFileSelect={handleFileSelect}
-          onClear={handleClear}
-          disabled={isLoading}
-          isScanning={isLoading}
-        />
-        {uploadError && <ErrorMessage message={uploadError} />}
-
-        <DescriptionInput
-          value={description}
-          onChange={setDescription}
-          disabled={isLoading}
-        />
-
-        <button
-          type="button"
-          className={styles.analyzeButton}
-          onClick={handleAnalyze}
-          disabled={!image || isLoading}
-        >
-          {isLoading ? 'Wird analysiert …' : 'Rezept erkennen'}
-        </button>
-      </section>
-
-      {/* aria-live: screen readers announce changes in this area */}
-      <section className={styles.output} aria-live="polite">
-        {isLoading && <LoadingState />}
-        {status === 'error' && (
-          <ErrorMessage
-            message={error.message}
-            onRetry={error.retryable ? handleAnalyze : undefined}
+    <>
+      <Header onNewPhoto={showResult ? handleNewPhoto : undefined} />
+      <main>
+        {showResult ? (
+          <ResultView
+            recipe={result}
+            previewUrl={image?.previewUrl}
+            onNewPhoto={handleNewPhoto}
+          />
+        ) : (
+          <StartView
+            image={image}
+            onFileSelect={handleFileSelect}
+            onClearImage={handleClearImage}
+            description={description}
+            onDescriptionChange={setDescription}
+            onSubmit={handleAnalyze}
+            isLoading={isLoading}
+            message={message}
           />
         )}
-        {status === 'success' && <ResultView recipe={result} />}
-      </section>
-    </main>
+      </main>
+      {!showResult && <Footer />}
+    </>
   )
 }
 

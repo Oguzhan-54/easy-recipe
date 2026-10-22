@@ -1,11 +1,19 @@
+.card {
+  padding: var(--space-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+}
+
 .heading {
-  margin: 0 0 var(--space-sm);
+  margin: 0 0 var(--space-lg);
+  font-size: 1.75rem;
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-lg);
   margin: 0;
   padding: 0;
   /* The numbers are drawn by us (.number), so hide the default ones */
@@ -14,22 +22,41 @@
 
 .step {
   display: flex;
-  gap: var(--space-sm);
+  gap: var(--space-md);
 }
 
 .number {
-  flex-shrink: 0;
   display: grid;
+  flex-shrink: 0;
   place-items: center;
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
   background-color: var(--color-primary);
   color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.title {
+  margin: 0.25rem 0 var(--space-xs);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
   font-weight: 600;
+  letter-spacing: 0;
 }
 
 .text {
   margin: 0;
-  padding-top: 0.25rem;
+  color: var(--color-text-muted);
+}
+
+@media (min-width: 48rem) {
+  .heading {
+    font-size: 1.5rem;
+  }
+
+  .text {
+    font-size: 0.9375rem;
+  }
 }
