@@ -1,4 +1,5 @@
 import { analyzeDish } from './_lib/gemini.js'
+import { analyzeDishMock, getMockMode } from './_lib/mockAi.js'
 
 // POST /api/analyze  –  body: { image, mimeType, description }
 // Full input validation, rate limiting and error codes follow in phase 5.
@@ -20,7 +21,11 @@ export async function POST(request) {
   }
 
   try {
-    const recipe = await analyzeDish({ image, mimeType, description })
+    // In mock mode (local development) a stored answer is returned instead of calling Gemini
+    const mockMode = getMockMode()
+    const recipe = mockMode
+      ? await analyzeDishMock(mockMode)
+      : await analyzeDish({ image, mimeType, description })
     return Response.json(recipe)
   } catch (error) {
     // Only log the error message – never the image or the full request
