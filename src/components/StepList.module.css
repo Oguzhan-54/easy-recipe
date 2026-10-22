@@ -1,0 +1,35 @@
+.heading {
+  margin: 0 0 var(--space-sm);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  /* The numbers are drawn by us (.number), so hide the default ones */
+  list-style: none;
+}
+
+.step {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.number {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.text {
+  margin: 0;
+  padding-top: 0.25rem;
+}

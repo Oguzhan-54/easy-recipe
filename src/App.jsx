@@ -2,6 +2,7 @@ import { useState } from 'react'
 import DescriptionInput from './components/DescriptionInput.jsx'
 import ErrorMessage from './components/ErrorMessage.jsx'
 import ImageUpload from './components/ImageUpload.jsx'
+import ResultView from './components/ResultView.jsx'
 import { useAnalyzeImage } from './hooks/useAnalyzeImage.js'
 import { resizeImage, validateImageFile } from './lib/resizeImage.js'
 import styles from './App.module.css'
@@ -96,10 +97,7 @@ function App() {
             onRetry={error.retryable ? handleAnalyze : undefined}
           />
         )}
-        {status === 'success' && (
-          // Raw output for now – the real recipe view follows in phase 4
-          <pre className={styles.result}>{JSON.stringify(result, null, 2)}</pre>
-        )}
+        {status === 'success' && <ResultView recipe={result} />}
       </section>
     </main>
   )
