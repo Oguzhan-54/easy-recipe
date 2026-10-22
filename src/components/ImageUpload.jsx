@@ -4,7 +4,13 @@ import styles from './ImageUpload.module.css'
 
 // Upload area: click to choose a file (on phones also the camera) or drag & drop a photo.
 // After selecting, it shows a preview instead.
-function ImageUpload({ previewUrl, onFileSelect, onClear, disabled }) {
+function ImageUpload({
+  previewUrl,
+  onFileSelect,
+  onClear,
+  disabled,
+  isScanning,
+}) {
   const [isDragging, setIsDragging] = useState(false)
 
   function handleChange(event) {
@@ -35,11 +41,15 @@ function ImageUpload({ previewUrl, onFileSelect, onClear, disabled }) {
   if (previewUrl) {
     return (
       <div className={styles.preview}>
-        <img
-          src={previewUrl}
-          alt="Vorschau des ausgewählten Fotos"
-          className={styles.image}
-        />
+        <div className={styles.imageWrapper}>
+          <img
+            src={previewUrl}
+            alt="Vorschau des ausgewählten Fotos"
+            className={styles.image}
+          />
+          {/* While analyzing, a light line moves over the photo like a scanner */}
+          {isScanning && <div className={styles.scan} aria-hidden="true" />}
+        </div>
         <button
           type="button"
           className={styles.changeButton}

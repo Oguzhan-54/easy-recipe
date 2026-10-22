@@ -2,6 +2,7 @@ import { useState } from 'react'
 import DescriptionInput from './components/DescriptionInput.jsx'
 import ErrorMessage from './components/ErrorMessage.jsx'
 import ImageUpload from './components/ImageUpload.jsx'
+import LoadingState from './components/LoadingState.jsx'
 import ResultView from './components/ResultView.jsx'
 import { useAnalyzeImage } from './hooks/useAnalyzeImage.js'
 import { resizeImage, validateImageFile } from './lib/resizeImage.js'
@@ -65,6 +66,7 @@ function App() {
           onFileSelect={handleFileSelect}
           onClear={handleClear}
           disabled={isLoading}
+          isScanning={isLoading}
         />
         {uploadError && <ErrorMessage message={uploadError} />}
 
@@ -86,11 +88,7 @@ function App() {
 
       {/* aria-live: screen readers announce changes in this area */}
       <section className={styles.output} aria-live="polite">
-        {isLoading && (
-          <p className={styles.loading}>
-            Gericht wird analysiert … das dauert ca. 10 Sekunden.
-          </p>
-        )}
+        {isLoading && <LoadingState />}
         {status === 'error' && (
           <ErrorMessage
             message={error.message}
