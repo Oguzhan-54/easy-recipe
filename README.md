@@ -2,7 +2,7 @@
 
 Foto von einem Gericht hochladen und ein Rezept bekommen: Die KI erkennt das Essen, schätzt Zutaten und Mengen und erklärt Schritt für Schritt, wie man es nachkocht.
 
-**Live-Demo: [LIVE_URL](LIVE_URL)**. Die Beispielbilder funktionieren ohne Wartezeit und ohne KI-Anfrage.
+**Live-Demo: [easy-recipe-sand.vercel.app](https://easy-recipe-sand.vercel.app)**. Die Beispielbilder funktionieren ohne Wartezeit und ohne KI-Anfrage.
 
 <p>
   <img src=".github/screenshots/start-desktop.jpg" alt="Startseite am Desktop mit Upload-Karte" width="64%">
@@ -87,7 +87,7 @@ Weitere Befehle: `npm test` (Vitest), `npm run lint`, `npm run format`, `npm run
 - Für das Rate-Limit wird die IP-Adresse bei Upstash (Frankfurt) gespeichert und nach spätestens zwei Stunden automatisch gelöscht.
 - Keine Cookies, kein Tracking. Schriften und Bilder werden selbst gehostet.
 
-Details stehen auf der Seite [/datenschutz](LIVE_URL/datenschutz).
+Details stehen auf der Seite [/datenschutz](https://easy-recipe-sand.vercel.app/datenschutz).
 
 ## Bekannte Grenzen
 
