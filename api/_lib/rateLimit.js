@@ -59,9 +59,12 @@ export async function checkRateLimit(ip) {
     if (!dayResult.success) return limitError('DAILY_LIMIT_REACHED')
     return null
   } catch (error) {
-    // Upstash not reachable: let the request through. Gemini's own quota still protects us,
-    // and on the free tier that costs nothing – better than a broken app.
+    // Upstash not reachable (or its free quota used up, which a flood of requests can cause):
+    // live, block like a missing config, otherwise nothing limits the AI calls. Locally let it through.
     console.error('Rate limit check failed:', error.message)
+    if (process.env.VERCEL_ENV === 'production') {
+      return limitError('RATE_LIMIT_UNAVAILABLE')
+    }
     return null
   }
 }
