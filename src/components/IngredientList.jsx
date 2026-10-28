@@ -1,24 +1,21 @@
-import { formatAmount, formatServings } from '../lib/formatRecipe.js'
+import { formatAmount } from '../lib/formatRecipe.js'
+import ServingsControl from './ServingsControl.jsx'
 import styles from './IngredientList.module.css'
 
 // Ingredient card with checkboxes, so it can be used as a shopping list.
-function IngredientList({ ingredients, servings }) {
-  const servingsText = formatServings(servings)
-
+// The amounts come in already scaled to the chosen servings (see ResultView).
+function IngredientList({ ingredients, servings, onServingsChange }) {
   return (
     <section className={styles.card} aria-labelledby="ingredients-heading">
       <div className={styles.header}>
         <h2 id="ingredients-heading" className={styles.heading}>
           Zutaten
         </h2>
-        {/* Mobile shows a short "Für 2" next to the heading (see design) */}
         {servings && (
-          <span className={styles.servingsShort}>Für {servings}</span>
+          <ServingsControl servings={servings} onChange={onServingsChange} />
         )}
       </div>
-      <p className={styles.hint}>
-        {servingsText && `Für ${servingsText}. `}Hake beim Einkaufen ab.
-      </p>
+      <p className={styles.hint}>Hake beim Einkaufen ab.</p>
 
       <ul className={styles.list}>
         {ingredients.map((ingredient, index) => {
