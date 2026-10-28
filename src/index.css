@@ -1,5 +1,56 @@
 /* Global styles: reset + design tokens. Component styles live in *.module.css files. */
 
+/* Self-hosted fonts (latin only, just the weights in use), no request to Google → GDPR friendly.
+   A weight without its own file here gets faked by the browser, so add the file when using a new one. */
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/inter-v20-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/inter-v20-latin-600.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/fonts/inter-v20-latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('./assets/fonts/nunito-v32-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('./assets/fonts/nunito-v32-latin-600.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('./assets/fonts/nunito-v32-latin-700.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('./assets/fonts/nunito-v32-latin-800.woff2') format('woff2');
+  font-weight: 800;
+  font-display: swap;
+}
+
 :root {
   /* Colors from the design */
   --color-bg: #f8f7f2;
@@ -17,9 +68,8 @@
   --color-error-soft: #fef3f2;
   --color-focus: #1b2a22;
 
-  /* Self-hosted fonts (see main.jsx), no request to Google → GDPR friendly */
-  --font-body: 'DM Sans Variable', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Bricolage Grotesque Variable', var(--font-body);
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Nunito', var(--font-body);
 
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
