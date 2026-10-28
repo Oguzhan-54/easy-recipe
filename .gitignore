@@ -29,3 +29,6 @@ dist-ssr
 
 # Vercel CLI (project link + local build output)
 .vercel
+
+# Personal learning notes (synced via OneDrive, not GitHub)
+docs/
