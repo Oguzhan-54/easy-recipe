@@ -11,6 +11,7 @@ vi.mock('@upstash/ratelimit', () => ({
       this.type = prefix.split(':').at(-1)
     }
     async limit() {
+      if (blocked.has('down')) throw new Error('Upstash not reachable')
       return { success: !blocked.has(this.type) }
     }
   },
@@ -43,6 +44,15 @@ describe('checkRateLimit', () => {
 
   it('skips the limit locally without Upstash, but blocks in production', async () => {
     vi.stubEnv('UPSTASH_REDIS_REST_URL', '')
+    expect(await checkRateLimit('1.2.3.4')).toBeNull()
+    vi.stubEnv('VERCEL_ENV', 'production')
+    expect((await checkRateLimit('1.2.3.4')).code).toBe(
+      'RATE_LIMIT_UNAVAILABLE',
+    )
+  })
+
+  it('lets requests through locally when Upstash fails, but blocks in production', async () => {
+    blocked.add('down')
     expect(await checkRateLimit('1.2.3.4')).toBeNull()
     vi.stubEnv('VERCEL_ENV', 'production')
     expect((await checkRateLimit('1.2.3.4')).code).toBe(
