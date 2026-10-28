@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
-// A bit longer than the backend's Gemini timeout (25 s), so the backend can answer first
-const REQUEST_TIMEOUT_MS = 40_000
+// Longer than the backend needs for all Gemini attempts (50 s), so the backend can answer first
+const REQUEST_TIMEOUT_MS = 60_000
 
 // Sends an image to /api/analyze and keeps track of the request state.
 // status: 'idle' | 'loading' | 'success' | 'error'

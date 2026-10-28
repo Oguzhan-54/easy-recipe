@@ -1,4 +1,4 @@
-import { analyzeDish } from './_lib/gemini.js'
+import { AiQuotaError, analyzeDish } from './_lib/gemini.js'
 import { analyzeDishMock, getMockMode } from './_lib/mockAi.js'
 import { validateAnalyzeRequest } from './_lib/validateRequest.js'
 
@@ -33,6 +33,13 @@ export async function POST(request) {
   } catch (error) {
     // Only log the error message – never the image or the full request
     console.error('Gemini request failed:', error.message)
+    if (error instanceof AiQuotaError) {
+      return errorResponse(
+        429,
+        'AI_QUOTA_EXHAUSTED',
+        'Die KI ist gerade ausgelastet oder das Tageslimit ist erreicht. Bitte versuche es später noch einmal.',
+      )
+    }
     return errorResponse(
       502,
       'AI_FAILED',
