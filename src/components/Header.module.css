@@ -1,11 +1,27 @@
-.inner {
+/* Outer space around the box, aligned with the page content */
+.header {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-md) var(--gutter) 0;
+}
+
+/* The header itself is a card like the others on the page */
+.box {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--space-sm) var(--gutter);
+  padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
 }
 
 .logoLink {
@@ -17,28 +33,17 @@
    CSS then sets the real size – the width follows automatically */
 .logo {
   width: auto;
-  height: 3.25rem;
+  height: 2rem;
 }
 
 .navLink {
   color: var(--color-text);
   font-size: 0.9375rem;
+  font-weight: 600;
   text-decoration: none;
 }
 
 .navLink:hover {
+  color: var(--color-primary-hover);
   text-decoration: underline;
-}
-
-@media (min-width: 48rem) {
-  .logo {
-    height: 3.75rem;
-  }
-}
-
-/* Mobile result page (see design): "Neues Foto" left, logo right */
-@media (max-width: 47.99rem) {
-  .resultPage .logoLink {
-    order: 2;
-  }
 }

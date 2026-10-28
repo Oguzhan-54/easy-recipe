@@ -1,34 +1,63 @@
-/* Mobile first: everything below each other */
+/* ---------- Hero: headline + text, photo on the right (desktop only) ---------- */
+
 .hero {
   display: grid;
-  gap: var(--space-lg);
+  align-items: center;
+  gap: var(--space-xl);
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--space-lg) var(--gutter) var(--space-2xl);
+  padding: var(--space-xl) var(--gutter) var(--space-lg);
 }
 
 .title {
   margin: 0 0 var(--space-md);
-  font-size: clamp(2.5rem, 9vw, 3.75rem);
+  font-size: clamp(2.5rem, 9vw, 4.25rem);
   font-weight: 800;
-  line-height: 1.02;
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
 
 .lead {
-  margin: 0 0 var(--space-lg);
+  max-width: 32rem;
+  margin: 0;
   font-size: 1.0625rem;
   color: var(--color-text-muted);
 }
 
+/* On phones the upload card should be visible right away, so no photo there */
+.heroPreview {
+  display: none;
+}
+
+/* ---------- Upload card ---------- */
+
+.upload {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter) var(--space-2xl);
+}
+
+/* Mobile first: photo area above the note and the button */
 .card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
+  display: grid;
+  gap: var(--space-lg);
   padding: var(--space-md);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   background-color: var(--color-surface);
   box-shadow: var(--shadow-card);
+}
+
+/* Grid child stretches, so the dropzone fills the full height next to the form */
+.dropArea {
+  display: grid;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-md);
 }
 
 .privacy {
@@ -37,39 +66,20 @@
   color: var(--color-text-muted);
 }
 
-/* The example card with the striped photo is only shown on wide screens (see design) */
-.heroPreview {
-  display: none;
-}
-
-/* Desktop: two columns – text + upload on the left, example/loading on the right */
 @media (min-width: 48rem) {
   .hero {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: var(--space-xl);
-    padding-top: var(--space-xl);
-  }
-
-  .intro {
-    max-width: 26rem;
-  }
-
-  .card {
-    padding: var(--space-md);
+    grid-template-columns: 1fr minmax(0, 24rem);
+    padding-top: var(--space-2xl);
+    padding-bottom: var(--space-xl);
   }
 
   .heroPreview {
     display: block;
   }
-}
 
-@media (min-width: 64rem) {
-  .hero {
-    gap: var(--space-2xl);
-  }
-
-  .intro {
-    max-width: 28rem;
+  .card {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    padding: var(--space-lg);
   }
 }

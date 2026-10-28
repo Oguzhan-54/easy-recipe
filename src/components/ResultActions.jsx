@@ -7,7 +7,7 @@ import styles from './ResultActions.module.css'
 // How long "Kopiert" is shown after copying
 const COPIED_RESET_MS = 2000
 
-// "Weiteres Gericht analysieren" + "Rezept kopieren".
+// "Neues Foto analysieren" + "Rezept kopieren" (same text for analysed and ready-made recipes).
 // Desktop: buttons below the title. Mobile: fixed bar at the bottom of the screen.
 function ResultActions({ recipe, onNewPhoto }) {
   // 'idle' | 'copied' | 'failed'
@@ -41,7 +41,7 @@ function ResultActions({ recipe, onNewPhoto }) {
       <Button size="lg" onClick={onNewPhoto} className={styles.newButton}>
         <IconCamera size={20} />
         <span>
-          Weiteres Gericht
+          Neues Foto
           <span className={styles.desktopOnly}> analysieren</span>
         </span>
       </Button>

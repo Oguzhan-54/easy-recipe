@@ -1,0 +1,93 @@
+{
+  "id": "ruehrei",
+  "imageSrc": "/recipes/ruehrei.jpg",
+  "recipe": {
+    "isFood": true,
+    "dishName": "Überbackenes Gemüse-Rührei",
+    "confidence": "high",
+    "description": "Cremiges Rührei mit Zucchini, Zwiebel und Tomaten, in der Pfanne mit Käse überbacken und mit Petersilie bestreut. Dazu knuspriges Röstbrot.",
+    "servings": 2,
+    "durationMinutes": 20,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "name": "Eier",
+        "amount": 5,
+        "unit": "Stück"
+      },
+      {
+        "name": "Milch",
+        "amount": 3,
+        "unit": "EL"
+      },
+      {
+        "name": "Zucchini",
+        "amount": 0.5,
+        "unit": "Stück"
+      },
+      {
+        "name": "Zwiebel",
+        "amount": 0.5,
+        "unit": "Stück"
+      },
+      {
+        "name": "Tomate",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Geriebener Käse (z. B. Cheddar)",
+        "amount": 60,
+        "unit": "g"
+      },
+      {
+        "name": "Butter",
+        "amount": 1,
+        "unit": "EL"
+      },
+      {
+        "name": "Frische Petersilie",
+        "amount": null,
+        "unit": "zum Garnieren"
+      },
+      {
+        "name": "Brotscheiben",
+        "amount": 4,
+        "unit": "Stück"
+      },
+      {
+        "name": "Salz und Pfeffer",
+        "amount": null,
+        "unit": "nach Geschmack"
+      }
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Gemüse vorbereiten",
+        "text": "Zucchini, Zwiebel und Tomate in kleine Würfel schneiden. Den Backofengrill vorheizen."
+      },
+      {
+        "number": 2,
+        "title": "Gemüse anbraten",
+        "text": "Butter in einer ofenfesten Pfanne erhitzen. Zwiebel und Zucchini darin 4 Minuten anbraten, dann die Tomate kurz mitbraten."
+      },
+      {
+        "number": 3,
+        "title": "Eier stocken lassen",
+        "text": "Eier mit Milch, Salz und Pfeffer verquirlen und über das Gemüse gießen. Bei niedriger Hitze unter gelegentlichem Rühren stocken lassen, bis die Masse noch leicht cremig ist."
+      },
+      {
+        "number": 4,
+        "title": "Überbacken",
+        "text": "Den Käse darüberstreuen und die Pfanne 2 bis 3 Minuten unter den Grill stellen, bis der Käse geschmolzen und leicht gebräunt ist."
+      },
+      {
+        "number": 5,
+        "title": "Servieren",
+        "text": "Brot rösten. Das Rührei mit gehackter Petersilie bestreuen und direkt in der Pfanne mit dem Röstbrot servieren."
+      }
+    ],
+    "notes": "Vorsicht: Der Pfannengriff wird im Ofen sehr heiß."
+  }
+}

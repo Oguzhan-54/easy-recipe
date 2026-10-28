@@ -1,0 +1,93 @@
+{
+  "id": "pancakes",
+  "imageSrc": "/recipes/pancakes.jpg",
+  "recipe": {
+    "isFood": true,
+    "dishName": "Fluffige Pancakes mit Beeren",
+    "confidence": "high",
+    "description": "Ein hoher Stapel lockerer amerikanischer Pancakes, belegt mit frischen Himbeeren und Blaubeeren und bestäubt mit Puderzucker.",
+    "servings": 2,
+    "durationMinutes": 25,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "name": "Weizenmehl",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Backpulver",
+        "amount": 2,
+        "unit": "TL"
+      },
+      {
+        "name": "Zucker",
+        "amount": 2,
+        "unit": "EL"
+      },
+      {
+        "name": "Salz",
+        "amount": 1,
+        "unit": "Prise"
+      },
+      {
+        "name": "Milch",
+        "amount": 250,
+        "unit": "ml"
+      },
+      {
+        "name": "Eier",
+        "amount": 2,
+        "unit": "Stück"
+      },
+      {
+        "name": "Butter, geschmolzen",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "Butter oder Öl für die Pfanne",
+        "amount": null,
+        "unit": "etwas"
+      },
+      {
+        "name": "Himbeeren",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Blaubeeren",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Puderzucker",
+        "amount": 1,
+        "unit": "EL"
+      }
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Trockene Zutaten mischen",
+        "text": "Mehl, Backpulver, Zucker und Salz in einer Schüssel vermengen."
+      },
+      {
+        "number": 2,
+        "title": "Teig anrühren",
+        "text": "Milch, Eier und geschmolzene Butter verquirlen, zu den trockenen Zutaten geben und nur kurz verrühren, bis keine Mehlnester mehr da sind. Ein paar Klümpchen sind in Ordnung. Den Teig 5 Minuten ruhen lassen."
+      },
+      {
+        "number": 3,
+        "title": "Pancakes backen",
+        "text": "Eine Pfanne bei mittlerer Hitze leicht einfetten. Pro Pancake etwa 3 EL Teig hineingeben. Wenden, sobald sich an der Oberfläche Bläschen bilden, und die zweite Seite 1 Minute goldbraun backen."
+      },
+      {
+        "number": 4,
+        "title": "Anrichten",
+        "text": "Die Pancakes stapeln, mit Himbeeren und Blaubeeren belegen und mit Puderzucker bestäuben."
+      }
+    ],
+    "notes": "Dazu passen Ahornsirup oder Joghurt."
+  }
+}

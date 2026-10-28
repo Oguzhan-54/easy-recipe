@@ -1,3 +1,5 @@
+import Button from './Button.jsx'
+import RecipeGrid from './RecipeGrid.jsx'
 import styles from './HowItWorks.module.css'
 
 // Photos from Unsplash, stored in /public/steps
@@ -22,8 +24,9 @@ const STEPS = [
   },
 ]
 
-// The id is the target of the "So funktioniert's" link in the header
-function HowItWorks() {
+// The id is the target of the "So funktioniert's" link in the footer.
+// Below the steps: recipes to cook, plus a link to all of them on /rezepte.
+function HowItWorks({ onRecipeSelect }) {
   return (
     <section
       id="so-funktionierts"
@@ -56,6 +59,14 @@ function HowItWorks() {
             </li>
           ))}
         </ol>
+
+        <div className={styles.recipesHeader}>
+          <h2 className={styles.heading}>Rezepte zum Nachkochen</h2>
+          <Button size="sm" href="/rezepte">
+            Rezepte durchsuchen
+          </Button>
+        </div>
+        <RecipeGrid onSelect={onRecipeSelect} limit={3} />
       </div>
     </section>
   )

@@ -73,6 +73,25 @@
   color: var(--color-text-muted);
 }
 
+/* Heading + "Rezepte durchsuchen" always in one row: on narrow screens
+   the heading wraps onto a second line, the button keeps its size */
+.recipesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin: var(--space-2xl) 0 var(--space-lg);
+}
+
+.recipesHeader .heading {
+  min-width: 0;
+  margin: 0;
+}
+
+.recipesHeader > a {
+  flex-shrink: 0;
+}
+
 @media (min-width: 48rem) {
   .list {
     grid-template-columns: repeat(3, 1fr);

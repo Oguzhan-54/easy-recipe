@@ -5,5 +5,3 @@ export const OWNER = {
   city: '42781 Haan',
   email: 'oguzhanaslan54@hotmail.de',
 }
-
-export const REPO_URL = 'https://github.com/Oguzhan-54/easy-recipe'

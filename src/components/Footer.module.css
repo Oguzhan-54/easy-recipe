@@ -1,27 +1,41 @@
+/* Outer space around the box, aligned with the page content (like the header) */
 .footer {
-  border-top: 1px solid var(--color-border);
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
-}
-
-/* Mobile first: everything below each other */
-.inner {
-  display: grid;
-  gap: var(--space-lg);
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--space-xl) var(--gutter) var(--space-lg);
+  padding: var(--space-xl) var(--gutter) var(--space-md);
 }
 
+.box {
+  padding: var(--space-xl) var(--space-lg) var(--space-md);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-primary);
+  /* Light text on rosemary: about 9:1 contrast */
+  color: #d5e3da;
+  font-size: 0.875rem;
+}
+
+/* Mobile first: logo on top, the two link columns next to each other below it */
+.inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  padding-bottom: var(--space-lg);
+}
+
+/* inline-flex: the clickable area is exactly the logo, not the whole grid column */
+.logoLink {
+  display: inline-flex;
+  grid-column: 1 / -1;
+  align-self: start;
+  justify-self: start;
+  border-radius: var(--radius-sm);
+}
+
+/* The logo SVG is dark green – turned white for the dark background */
 .logo {
   width: auto;
-  height: 2.75rem;
-  opacity: 0.85;
-}
-
-.text {
-  max-width: 24rem;
-  margin: var(--space-sm) 0 0;
+  height: 4rem;
+  filter: brightness(0) invert(1);
 }
 
 .heading {
@@ -29,7 +43,7 @@
   font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--color-text);
+  color: #ffffff;
 }
 
 .links {
@@ -40,38 +54,45 @@
   list-style: none;
 }
 
-.links a,
-.bottom a {
-  color: var(--color-text-muted);
+.box a {
+  color: #d5e3da;
 }
 
-.links a:hover,
-.bottom a:hover {
-  color: var(--color-text);
+.box a:hover {
+  color: #ffffff;
+}
+
+/* Focus ring in white, the default dark one would be invisible here */
+.box a:focus-visible {
+  outline-color: #ffffff;
 }
 
 .bottom {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: var(--space-md) var(--gutter) var(--space-xl);
-  border-top: 1px solid var(--color-border);
-}
-
-.bottom p {
   margin: 0;
+  padding-top: var(--space-md);
+  border-top: 1px solid rgb(255 255 255 / 0.15);
+  font-size: 0.8125rem;
 }
 
-/* Phones: room for the fixed button bar of the result page, so it does not cover the last line */
+/* Phones: room for the fixed button bar of the result page, so it does not cover the footer */
 @media (max-width: 47.99rem) {
-  .withActionBar .bottom {
+  .withActionBar {
     padding-bottom: 6rem;
   }
 }
 
 /* Desktop: about text left, two link columns right */
 @media (min-width: 48rem) {
+  .box {
+    padding: var(--space-xl) var(--space-xl) var(--space-md);
+  }
+
   .inner {
     grid-template-columns: 2fr 1fr 1fr;
     gap: var(--space-xl);
+  }
+
+  .logoLink {
+    grid-column: auto;
   }
 }

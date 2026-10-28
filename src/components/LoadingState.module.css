@@ -1,14 +1,10 @@
+/* No own card: it sits inside the upload card, next to the scanned photo */
 .loading {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: var(--space-xl);
+  gap: var(--space-lg);
   height: 100%;
-  padding: var(--space-xl) var(--space-lg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background-color: var(--color-surface);
-  box-shadow: var(--shadow-card);
 }
 
 /* Visible only for screen readers */

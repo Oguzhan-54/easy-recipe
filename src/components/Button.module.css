@@ -20,6 +20,11 @@
   cursor: not-allowed;
 }
 
+.sm {
+  padding: 0.4375rem 0.875rem;
+  font-size: 0.875rem;
+}
+
 .md {
   padding: 0.625rem 1.125rem;
   font-size: 0.9375rem;
@@ -42,6 +47,13 @@
 .primary {
   background-color: var(--color-primary);
   color: #ffffff;
+}
+
+/* Solid grey instead of faded green, so the text stays readable (WCAG contrast) */
+.primary:disabled {
+  background-color: var(--color-disabled);
+  color: var(--color-disabled-text);
+  opacity: 1;
 }
 
 .primary:hover:not(:disabled) {

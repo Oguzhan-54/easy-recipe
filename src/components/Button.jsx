@@ -20,6 +20,15 @@ function Button({
     .filter(Boolean)
     .join(' ')
 
+  // With href it is a link that only looks like a button (navigation belongs in <a>)
+  if (props.href) {
+    return (
+      <a className={classes} {...props}>
+        {children}
+      </a>
+    )
+  }
+
   return (
     // type="button" as default, so a button inside a form does not submit it by accident
     <button type="button" className={classes} {...props}>
