@@ -1,12 +1,19 @@
 import { useEffect, useState } from 'react'
 import Footer from './components/Footer.jsx'
 import Header from './components/Header.jsx'
+import ImprintPage from './components/ImprintPage.jsx'
+import PrivacyPage from './components/PrivacyPage.jsx'
 import ResultView from './components/ResultView.jsx'
 import StartView from './components/StartView.jsx'
 import { useAnalyzeImage } from './hooks/useAnalyzeImage.js'
 import { resizeImage, validateImageFile } from './lib/resizeImage.js'
 
+// Separate URLs for the legal pages. vercel.json sends both paths to index.html,
+// so we pick the page here instead of using a router library.
+const LEGAL_PAGES = { '/impressum': ImprintPage, '/datenschutz': PrivacyPage }
+
 function App() {
+  const LegalPageView = LEGAL_PAGES[window.location.pathname]
   // The already resized image: { base64, mimeType, previewUrl }
   const [image, setImage] = useState(null)
   const [uploadError, setUploadError] = useState(null)
@@ -92,7 +99,9 @@ function App() {
     <>
       <Header onNewPhoto={showResult ? handleNewPhoto : undefined} />
       <main>
-        {showResult ? (
+        {LegalPageView ? (
+          <LegalPageView />
+        ) : showResult ? (
           <ResultView
             recipe={result}
             previewUrl={image?.previewUrl}
@@ -112,7 +121,8 @@ function App() {
           />
         )}
       </main>
-      {!showResult && <Footer />}
+      {/* On every page: the imprint must always be reachable */}
+      <Footer hasActionBar={showResult} />
     </>
   )
 }

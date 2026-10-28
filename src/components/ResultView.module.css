@@ -1,8 +1,7 @@
 .page {
   max-width: var(--max-width);
   margin: 0 auto;
-  /* Bottom: room for the fixed button bar on phones */
-  padding: var(--space-md) var(--gutter) 7rem;
+  padding: var(--space-md) var(--gutter) var(--space-xl);
 }
 
 .top {
