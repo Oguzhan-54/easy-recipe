@@ -1,15 +1,16 @@
 .footer {
   border-top: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
 }
 
+/* Mobile first: everything below each other */
 .inner {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-md);
+  display: grid;
+  gap: var(--space-lg);
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: var(--space-lg) var(--gutter) var(--space-2xl);
+  padding: var(--space-xl) var(--gutter) var(--space-lg);
 }
 
 .logo {
@@ -19,23 +20,58 @@
 }
 
 .text {
+  max-width: 24rem;
+  margin: var(--space-sm) 0 0;
+}
+
+.heading {
+  margin: 0 0 var(--space-sm);
+  font-family: var(--font-body);
   font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.links {
+  display: grid;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.links a,
+.bottom a {
   color: var(--color-text-muted);
 }
 
-.text p {
+.links a:hover,
+.bottom a:hover {
+  color: var(--color-text);
+}
+
+.bottom {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-md) var(--gutter) var(--space-xl);
+  border-top: 1px solid var(--color-border);
+}
+
+.bottom p {
   margin: 0;
 }
 
-.text p + p {
-  margin-top: var(--space-sm);
+/* Phones: room for the fixed button bar of the result page, so it does not cover the last line */
+@media (max-width: 47.99rem) {
+  .withActionBar .bottom {
+    padding-bottom: 6rem;
+  }
 }
 
-/* Desktop: logo and text next to each other */
+/* Desktop: about text left, two link columns right */
 @media (min-width: 48rem) {
   .inner {
-    flex-direction: row;
-    align-items: center;
-    gap: var(--space-lg);
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: var(--space-xl);
   }
 }

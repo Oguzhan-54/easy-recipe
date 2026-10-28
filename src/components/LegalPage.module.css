@@ -1,0 +1,30 @@
+.page {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--gutter) var(--space-2xl);
+}
+
+.back {
+  color: var(--color-primary-hover);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.title {
+  margin: var(--space-lg) 0;
+  font-size: clamp(2rem, 7vw, 2.75rem);
+}
+
+.content h2 {
+  margin: var(--space-xl) 0 var(--space-sm);
+  font-size: 1.25rem;
+}
+
+.content p,
+.content ul {
+  margin: 0 0 var(--space-md);
+}
+
+.content a {
+  color: var(--color-primary-hover);
+}

@@ -30,7 +30,7 @@ function Header({ onNewPhoto }) {
             Neues Foto
           </Button>
         ) : (
-          <a href="#so-funktionierts" className={styles.navLink}>
+          <a href="/#so-funktionierts" className={styles.navLink}>
             So funktioniert&apos;s
           </a>
         )}
