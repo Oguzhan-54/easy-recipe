@@ -6,12 +6,6 @@ const DIFFICULTY_LABELS = {
   hard: 'Schwer',
 }
 
-const CONFIDENCE_LABELS = {
-  high: 'Sicher erkannt',
-  medium: 'Wahrscheinlich',
-  low: 'Unsicher',
-}
-
 // German number format: 0.5 → "0,5", 1500 → "1.500", at most 2 decimals
 const numberFormat = new Intl.NumberFormat('de-DE', {
   maximumFractionDigits: 2,
@@ -19,10 +13,6 @@ const numberFormat = new Intl.NumberFormat('de-DE', {
 
 export function formatDifficulty(difficulty) {
   return DIFFICULTY_LABELS[difficulty] ?? null
-}
-
-export function formatConfidence(confidence) {
-  return CONFIDENCE_LABELS[confidence] ?? null
 }
 
 export function formatDuration(minutes) {
