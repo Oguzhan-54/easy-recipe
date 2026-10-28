@@ -1,5 +1,6 @@
 import { AiQuotaError, analyzeDish } from './_lib/gemini.js'
 import { analyzeDishMock, getMockMode } from './_lib/mockAi.js'
+import { checkRateLimit } from './_lib/rateLimit.js'
 import { validateAnalyzeRequest } from './_lib/validateRequest.js'
 
 // POST /api/analyze  –  body: { image, mimeType, description }
@@ -19,6 +20,13 @@ export async function POST(request) {
   const validationError = validateAnalyzeRequest(body)
   if (validationError) {
     return errorResponse(400, validationError.code, validationError.message)
+  }
+
+  // After validation, so broken requests do not count towards the limit
+  const limitError = await checkRateLimit(getClientIp(request))
+  if (limitError) {
+    const status = limitError.code === 'RATE_LIMIT_UNAVAILABLE' ? 503 : 429
+    return errorResponse(status, limitError.code, limitError.message)
   }
 
   const { image, mimeType, description = '' } = body
@@ -46,6 +54,13 @@ export async function POST(request) {
       'Die Analyse ist fehlgeschlagen. Bitte versuche es erneut.',
     )
   }
+}
+
+// Vercel puts the visitor's IP first in x-forwarded-for (and overwrites a faked header)
+function getClientIp(request) {
+  return (
+    request.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown'
+  )
 }
 
 // Uniform error format (see CLAUDE.md, section 10)
