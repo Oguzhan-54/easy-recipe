@@ -1,6 +1,6 @@
 import styles from './DescriptionInput.module.css'
 
-// Same limit as planned for the backend validation (CLAUDE.md, section 8)
+// Same limit as the backend validation (api/_lib/validateRequest.js)
 export const MAX_DESCRIPTION_LENGTH = 300
 
 // Optional short note about the dish, e.g. "vegetarische Variante" or "für 4 Personen".
