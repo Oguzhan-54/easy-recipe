@@ -31,6 +31,12 @@
   box-shadow: var(--shadow-card);
 }
 
+.privacy {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
 /* The example card with the striped photo is only shown on wide screens (see design) */
 .heroPreview {
   display: none;

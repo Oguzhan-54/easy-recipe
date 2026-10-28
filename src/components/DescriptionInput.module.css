@@ -23,6 +23,7 @@
   resize: vertical;
 }
 
+/* #6b736f: still lighter than real text, but 4.9:1 contrast (WCAG needs 4.5:1) */
 .textarea::placeholder {
-  color: #8a918d;
+  color: #6b736f;
 }

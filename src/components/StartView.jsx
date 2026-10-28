@@ -77,6 +77,12 @@ function StartView({
                 </>
               )}
             </Button>
+            {/* GDPR: users must know where the photo goes before uploading it */}
+            <p className={styles.privacy}>
+              Dein Foto wird zur Analyse an Google (Gemini) gesendet und hier
+              nicht gespeichert. Bitte keine Fotos mit Personen oder privaten
+              Daten hochladen.
+            </p>
           </form>
 
           <ExampleImages onSelect={onExampleSelect} disabled={isLoading} />
