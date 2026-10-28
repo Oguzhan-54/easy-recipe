@@ -11,7 +11,7 @@ function App() {
   const [image, setImage] = useState(null)
   const [uploadError, setUploadError] = useState(null)
   const [description, setDescription] = useState('')
-  const { status, result, error, analyze, reset } = useAnalyzeImage()
+  const { status, result, error, analyze, showDemo, reset } = useAnalyzeImage()
 
   const isLoading = status === 'loading'
   // Two "pages" without a router: the result page replaces the start page
@@ -40,6 +40,14 @@ function App() {
         'Das Foto konnte nicht gelesen werden. Bitte ein anderes wählen.',
       )
     }
+  }
+
+  // Example photo: preview + stored recipe, no AI request (demo mode)
+  function handleExampleSelect(example) {
+    setUploadError(null)
+    setDescription('')
+    setImage({ previewUrl: example.imageSrc })
+    showDemo(example.recipe)
   }
 
   function handleClearImage() {
@@ -94,6 +102,7 @@ function App() {
           <StartView
             image={image}
             onFileSelect={handleFileSelect}
+            onExampleSelect={handleExampleSelect}
             onClearImage={handleClearImage}
             description={description}
             onDescriptionChange={setDescription}

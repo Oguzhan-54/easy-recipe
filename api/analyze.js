@@ -37,7 +37,7 @@ export async function POST(request) {
       return errorResponse(
         429,
         'AI_QUOTA_EXHAUSTED',
-        'Die KI ist gerade ausgelastet oder das Tageslimit ist erreicht. Bitte versuche es später noch einmal.',
+        'Die KI ist gerade ausgelastet oder das Tageslimit ist erreicht. Probier solange die Beispielbilder oder versuche es später noch einmal.',
       )
     }
     return errorResponse(

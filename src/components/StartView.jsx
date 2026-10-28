@@ -1,6 +1,7 @@
 import Button from './Button.jsx'
 import DescriptionInput from './DescriptionInput.jsx'
 import ErrorMessage from './ErrorMessage.jsx'
+import ExampleImages from './ExampleImages.jsx'
 import HeroPreview from './HeroPreview.jsx'
 import HowItWorks from './HowItWorks.jsx'
 import ImageUpload from './ImageUpload.jsx'
@@ -13,6 +14,7 @@ import styles from './StartView.module.css'
 function StartView({
   image,
   onFileSelect,
+  onExampleSelect,
   onClearImage,
   description,
   onDescriptionChange,
@@ -76,6 +78,8 @@ function StartView({
               )}
             </Button>
           </form>
+
+          <ExampleImages onSelect={onExampleSelect} disabled={isLoading} />
         </div>
 
         {/* aria-live: screen readers announce when the loading state appears */}

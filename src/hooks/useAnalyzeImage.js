@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 // Longer than the backend needs for all Gemini attempts (50 s), so the backend can answer first
 const REQUEST_TIMEOUT_MS = 60_000
+// Demo mode: short fake loading time, so the loading animation is visible
+const DEMO_DELAY_MS = 2000
 
 // Sends an image to /api/analyze and keeps track of the request state.
 // status: 'idle' | 'loading' | 'success' | 'error'
@@ -51,11 +53,22 @@ export function useAnalyzeImage() {
     }
   }
 
+  // Demo mode: shows a stored recipe like a real result, without a request
+  function showDemo(recipe) {
+    setStatus('loading')
+    setResult(null)
+    setError(null)
+    setTimeout(() => {
+      setResult(recipe)
+      setStatus('success')
+    }, DEMO_DELAY_MS)
+  }
+
   function reset() {
     setStatus('idle')
     setResult(null)
     setError(null)
   }
 
-  return { status, result, error, analyze, reset }
+  return { status, result, error, analyze, showDemo, reset }
 }
