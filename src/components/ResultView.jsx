@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import {
   formatDifficulty,
   formatDuration,
   formatServings,
 } from '../lib/formatRecipe.js'
+import { scaleIngredients } from '../lib/scaleIngredients.js'
 import IngredientList from './IngredientList.jsx'
 import ResultActions from './ResultActions.jsx'
 import StepList from './StepList.jsx'
@@ -10,7 +12,20 @@ import { IconClock, IconDifficulty, IconUsers } from './icons.jsx'
 import styles from './ResultView.module.css'
 
 // Result page: photo + summary at the top, ingredients and steps below.
-function ResultView({ recipe, previewUrl, onNewPhoto }) {
+function ResultView({ recipe: originalRecipe, previewUrl, onNewPhoto }) {
+  // Chosen servings; starts with the AI's estimate. A new photo unmounts this view, so it resets.
+  const [chosenServings, setChosenServings] = useState(originalRecipe.servings)
+  // Everything below (chips, ingredients, copy text) uses the scaled recipe
+  const recipe = {
+    ...originalRecipe,
+    servings: chosenServings,
+    ingredients: scaleIngredients(
+      originalRecipe.ingredients,
+      originalRecipe.servings,
+      chosenServings,
+    ),
+  }
+
   const duration = formatDuration(recipe.durationMinutes)
   const servings = formatServings(recipe.servings)
   const difficulty = formatDifficulty(recipe.difficulty)
@@ -66,6 +81,7 @@ function ResultView({ recipe, previewUrl, onNewPhoto }) {
           <IngredientList
             ingredients={recipe.ingredients}
             servings={recipe.servings}
+            onServingsChange={setChosenServings}
           />
         )}
         {recipe.steps.length > 0 && <StepList steps={recipe.steps} />}

@@ -7,7 +7,8 @@
 
 .header {
   display: flex;
-  align-items: baseline;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: space-between;
   gap: var(--space-md);
 }
@@ -17,11 +18,7 @@
   font-size: 1.75rem;
 }
 
-.servingsShort {
-  color: var(--color-text-muted);
-}
-
-/* Mobile: only the short "Für 2", desktop: the full hint below the heading */
+/* Hint only on desktop, on mobile the space is needed for the list */
 .hint {
   display: none;
   margin: var(--space-sm) 0 0;
@@ -78,10 +75,6 @@
 @media (min-width: 48rem) {
   .heading {
     font-size: 1.5rem;
-  }
-
-  .servingsShort {
-    display: none;
   }
 
   .hint {
