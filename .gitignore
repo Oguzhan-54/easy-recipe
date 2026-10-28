@@ -29,6 +29,3 @@ dist-ssr
 
 # Vercel CLI (project link + local build output)
 .vercel
-
-# Claude Code project instructions (local only)
-CLAUDE.md
