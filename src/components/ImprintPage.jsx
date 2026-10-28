@@ -21,9 +21,9 @@ function ImprintPage() {
 
       <h2>Hinweis</h2>
       <p>
-        EasyRecipe ist ein nicht-kommerzielles Portfolio-Projekt. Die Rezepte
-        werden von einer KI erzeugt und können Fehler enthalten. Prüfe Zutaten,
-        Mengen und Garzeiten vor dem Kochen.
+        EasyRecipe ist ein nicht-kommerzielles Projekt. Die Rezepte werden von
+        einer KI erzeugt und können Fehler enthalten. Prüfe Zutaten, Mengen und
+        Garzeiten vor dem Kochen.
       </p>
     </LegalPage>
   )

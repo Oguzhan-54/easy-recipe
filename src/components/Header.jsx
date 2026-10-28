@@ -1,39 +1,38 @@
 import Button from './Button.jsx'
-import { IconArrowLeft } from './icons.jsx'
+import { IconUpload } from './icons.jsx'
 import styles from './Header.module.css'
 
-// Top bar. On the start page it links to "So funktioniert's",
-// on the result page it shows a "Neues Foto" button instead.
+// Floating header box: logo on the left, "Rezepte" + "Bild hochladen" on the right.
+// On the result page the button goes back to an empty start page (onNewPhoto),
+// everywhere else it is a link to the upload card.
 function Header({ onNewPhoto }) {
-  const isResultPage = Boolean(onNewPhoto)
+  const uploadProps = onNewPhoto
+    ? { onClick: onNewPhoto }
+    : { href: '/#hochladen' }
 
   return (
     <header className={styles.header}>
-      <div
-        className={`${styles.inner} ${isResultPage ? styles.resultPage : ''}`}
-      >
+      <div className={styles.box}>
         {/* A normal link to "/" reloads the app = back to the start page */}
         <a href="/" className={styles.logoLink}>
-          {/* The logo already contains the name, so the alt text is the name */}
           <img
             src="/logo.svg"
             alt="EasyRecipe – zur Startseite"
             className={styles.logo}
-            width="81"
-            height="71"
+            width="63"
+            height="53"
           />
         </a>
 
-        {isResultPage ? (
-          <Button variant="outline" onClick={onNewPhoto}>
-            <IconArrowLeft size={18} />
-            Neues Foto
-          </Button>
-        ) : (
-          <a href="/#so-funktionierts" className={styles.navLink}>
-            So funktioniert&apos;s
+        <nav className={styles.nav} aria-label="Hauptnavigation">
+          <a href="/rezepte" className={styles.navLink}>
+            Rezepte
           </a>
-        )}
+          <Button size="sm" {...uploadProps}>
+            <IconUpload size={16} />
+            Bild hochladen
+          </Button>
+        </nav>
       </div>
     </header>
   )

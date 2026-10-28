@@ -55,7 +55,7 @@ flowchart LR
 - **Rate-Limit mit Upstash:** 5 Analysen pro IP und Stunde, 100 pro Tag insgesamt. Serverless-Funktionen vergessen nach jeder Anfrage alles, deshalb liegt der Zähler in Redis. Fehlen die Upstash-Daten in Produktion, wird blockiert statt das Kontingent zu öffnen.
 - **Validierung im Backend:** Dateityp, Größe, Base64 und Länge der Notiz werden auf dem Server noch einmal geprüft. Das Frontend lässt sich umgehen, zum Beispiel mit `curl`.
 - **Prompt-Injection-Schutz:** Die Notiz des Nutzers wird klar markiert an Gemini übergeben, und der System-Prompt sagt, dass sie nur eine Zusatzinformation ist und keine Anweisung.
-- **Demo-Modus:** Beispielbilder liefern echte, einmal erzeugte Gemini-Antworten aus `src/lib/demoData.js`. Besucher sehen sofort ein Ergebnis, ohne Kontingent zu verbrauchen.
+- **Demo-Modus:** Die fertigen Rezepte liegen als JSON-Dateien in `src/recipes/` (Fotos in `public/recipes/`). Besucher sehen sofort ein Ergebnis, ohne Kontingent zu verbrauchen.
 - **Kein Router, kein UI-Framework:** Zwei Ansichten und zwei Rechtsseiten brauchen keine zusätzlichen Pakete.
 
 ## Lokal starten

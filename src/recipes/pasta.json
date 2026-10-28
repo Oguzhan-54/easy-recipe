@@ -1,0 +1,89 @@
+{
+  "id": "pasta",
+  "imageSrc": "/recipes/pasta.jpg",
+  "photoCredit": "Krista Stucchio on Unsplash",
+  "recipe": {
+    "isFood": true,
+    "dishName": "Spaghetti Bolognese",
+    "confidence": "high",
+    "description": "Klassische Spaghetti serviert mit einer würzigen Hackfleisch-Tomatensauce.",
+    "servings": 2,
+    "durationMinutes": 45,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "name": "Spaghetti",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Rinderhackfleisch",
+        "amount": 250,
+        "unit": "g"
+      },
+      {
+        "name": "Zwiebel",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Knoblauchzehe",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Gehackte Tomaten (Dose)",
+        "amount": 400,
+        "unit": "g"
+      },
+      {
+        "name": "Tomatenmark",
+        "amount": 2,
+        "unit": "EL"
+      },
+      {
+        "name": "Olivenöl",
+        "amount": 2,
+        "unit": "EL"
+      },
+      {
+        "name": "Italienische Kräuter",
+        "amount": 1,
+        "unit": "TL"
+      },
+      {
+        "name": "Salz und Pfeffer",
+        "amount": null,
+        "unit": "nach Geschmack"
+      }
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Gemüse schneiden",
+        "text": "Zwiebel und Knoblauch schälen und in feine Würfel schneiden."
+      },
+      {
+        "number": 2,
+        "title": "Fleisch anbraten",
+        "text": "Olivenöl in einer Pfanne erhitzen. Zwiebeln, Knoblauch und Hackfleisch darin krümelig anbraten."
+      },
+      {
+        "number": 3,
+        "title": "Sauce einkochen",
+        "text": "Tomatenmark kurz mitanbraten, dann die gehackten Tomaten und Kräuter dazugeben. Bei schwacher Hitze etwa 20 bis 30 Minuten köcheln lassen und mit Salz und Pfeffer abschmecken."
+      },
+      {
+        "number": 4,
+        "title": "Spaghetti kochen",
+        "text": "Spaghetti in reichlich kochendem Salzwasser nach Packungsanleitung al dente garen."
+      },
+      {
+        "number": 5,
+        "title": "Nudeln vermengen",
+        "text": "Die Spaghetti abgießen, direkt mit der Bolognese-Sauce vermischen und auf Tellern anrichten."
+      }
+    ],
+    "notes": "Eindeutig erkennbare Spaghetti mit Bolognese-Sauce."
+  }
+}

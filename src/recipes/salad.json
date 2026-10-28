@@ -1,0 +1,109 @@
+{
+  "id": "salad",
+  "imageSrc": "/recipes/salad.jpg",
+  "photoCredit": "Anna Pelzer on Unsplash",
+  "recipe": {
+    "isFood": true,
+    "dishName": "Bunte Buddha Bowl mit Süßkartoffel und Avocado",
+    "confidence": "high",
+    "description": "Eine frische, farbenfrohe Buddha Bowl mit gerösteten Süßkartoffeln, Kichererbsen, cremiger Avocado, frischem Gemüse und einem feinen Tahin-Dressing.",
+    "servings": 2,
+    "durationMinutes": 30,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "name": "Süßkartoffel",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Kichererbsen (gekocht)",
+        "amount": 200,
+        "unit": "g"
+      },
+      {
+        "name": "Avocado",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Kirschtomaten",
+        "amount": 150,
+        "unit": "g"
+      },
+      {
+        "name": "Gelbe Paprika",
+        "amount": 0.5,
+        "unit": "Stück"
+      },
+      {
+        "name": "Rotkohl",
+        "amount": 80,
+        "unit": "g"
+      },
+      {
+        "name": "Wassermelonen-Rettich oder Radieschen",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Grüner Salat",
+        "amount": 100,
+        "unit": "g"
+      },
+      {
+        "name": "Sprossen oder Microgreens",
+        "amount": 30,
+        "unit": "g"
+      },
+      {
+        "name": "Tahin (Sesammus)",
+        "amount": 2,
+        "unit": "EL"
+      },
+      {
+        "name": "Zitronensaft",
+        "amount": 1,
+        "unit": "EL"
+      },
+      {
+        "name": "Olivenöl",
+        "amount": 2,
+        "unit": "EL"
+      },
+      {
+        "name": "Salz und Pfeffer",
+        "amount": null,
+        "unit": "nach Geschmack"
+      }
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Süßkartoffeln rösten",
+        "text": "Den Backofen auf 200 °C Ober-/Unterhitze vorheizen. Die Süßkartoffel schälen, in kleine Würfel schneiden, mit 1 EL Olivenöl, Salz und Pfeffer vermengen und ca. 20 Minuten im Ofen weich und leicht braun rösten."
+      },
+      {
+        "number": 2,
+        "title": "Gemüse vorbereiten",
+        "text": "Salat und Sprossen waschen. Die Avocado halbieren, entkernen und in feine Scheiben schneiden. Paprika in Streifen, Rotkohl in feine Streifen und Rettich in dünne Scheiben schneiden."
+      },
+      {
+        "number": 3,
+        "title": "Dressing anrühren",
+        "text": "Tahin, Zitronensaft, 1 EL Olivenöl und etwa 2–3 EL lauwarmes Wasser verrühren, bis ein cremiges Dressing entsteht. Mit Salz und Pfeffer abschmecken."
+      },
+      {
+        "number": 4,
+        "title": "Bowl anrichten",
+        "text": "Den Salat als Basis in zwei Schüsseln verteilen. Die gerösteten Süßkartoffelwürfel, Kichererbsen, Avocado, Tomaten, Paprika, Rotkohl, Rettich und Sprossen nebeneinander anordnen."
+      },
+      {
+        "number": 5,
+        "title": "Servieren",
+        "text": "Das Tahin-Dressing gleichmäßig über die Bowls träufeln und nach Wunsch mit etwas frischem Pfeffer garnieren."
+      }
+    ],
+    "notes": "Das Gemüse kann je nach Saison und Vorliebe variiert werden. Anstelle des Tahin-Dressings passt auch ein Joghurt-Kräuter-Dressing hervorragend."
+  }
+}

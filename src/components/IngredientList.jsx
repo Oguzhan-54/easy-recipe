@@ -26,9 +26,9 @@ function IngredientList({ ingredients, servings, onServingsChange }) {
               {/* The label makes the whole row clickable, not only the small box */}
               <label className={styles.label}>
                 <input type="checkbox" className={styles.checkbox} />
-                <span className={styles.text}>
-                  {amount && <strong>{amount}</strong>} {ingredient.name}
-                </span>
+                {/* Own column, so all amounts line up like in a cookbook */}
+                <strong className={styles.amount}>{amount}</strong>
+                <span className={styles.text}>{ingredient.name}</span>
               </label>
             </li>
           )

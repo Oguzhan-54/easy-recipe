@@ -78,11 +78,11 @@ easy-recipe/
 │   │   └── useAnalyzeImage.js # fetch, loading, error, result
 │   ├── lib/
 │   │   ├── resizeImage.js     # Bild im Browser verkleinern + Base64
-│   │   ├── scaleIngredients.js
-│   │   └── demoData.js        # vorbereitete Antworten für Beispielbilder
+│   │   └── scaleIngredients.js
+│   ├── recipes/               # fertige Rezepte: eine JSON-Datei pro Rezept + index.js
 │   ├── App.jsx
 │   └── main.jsx
-├── public/examples/           # Beispielbilder (eigene Fotos oder klar lizenzfrei)
+├── public/recipes/            # Rezeptfotos (eigene Fotos oder klar lizenzfrei)
 ├── tests/
 ├── .env.example               # nur Platzhalter
 ├── .gitignore                 # muss .env* enthalten
@@ -105,7 +105,7 @@ easy-recipe/
    - validiert die Antwort und gibt JSON zurück
 5. Frontend rendert Zutaten, Rezept und Schritte.
 
-Beispielbilder nutzen den **Demo-Modus**: Sie liefern gespeicherte Antworten aus `demoData.js`
+Fertige Rezepte nutzen den **Demo-Modus**: Sie liefern gespeicherte Antworten aus `src/recipes/`
 und verbrauchen kein Kontingent. Nur eigene Uploads gehen an die KI.
 
 ---

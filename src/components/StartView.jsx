@@ -1,20 +1,18 @@
 import Button from './Button.jsx'
 import DescriptionInput from './DescriptionInput.jsx'
 import ErrorMessage from './ErrorMessage.jsx'
-import ExampleImages from './ExampleImages.jsx'
 import HeroPreview from './HeroPreview.jsx'
 import HowItWorks from './HowItWorks.jsx'
 import ImageUpload from './ImageUpload.jsx'
 import LoadingState from './LoadingState.jsx'
-import { IconArrowRight } from './icons.jsx'
 import styles from './StartView.module.css'
 
-// Start page: hero with upload card + "In drei Schritten" section.
+// Start page: hero, upload card, then "In drei Schritten" with recipes to cook.
 // It only displays things – all state lives in App.jsx and comes in as props.
 function StartView({
   image,
   onFileSelect,
-  onExampleSelect,
+  onRecipeSelect,
   onClearImage,
   description,
   onDescriptionChange,
@@ -41,8 +39,16 @@ function StartView({
             das Essen, listet die Zutaten auf und führt dich Schritt für Schritt
             durchs Kochen.
           </p>
+        </div>
+        <div className={styles.heroPreview}>
+          <HeroPreview imageSrc="/hero.jpg" />
+        </div>
+      </section>
 
-          <form className={styles.card} onSubmit={handleSubmit}>
+      <section className={styles.upload} aria-label="Foto hochladen">
+        {/* Desktop: photo on the left, note + button (or loading view) on the right */}
+        <form id="hochladen" className={styles.card} onSubmit={handleSubmit}>
+          <div className={styles.dropArea}>
             <ImageUpload
               previewUrl={image?.previewUrl}
               onFileSelect={onFileSelect}
@@ -50,56 +56,40 @@ function StartView({
               disabled={isLoading}
               isScanning={isLoading}
             />
-            <DescriptionInput
-              value={description}
-              onChange={onDescriptionChange}
-              disabled={isLoading}
-            />
-            {message && (
-              <ErrorMessage
-                message={message.text}
-                tone={message.tone}
-                onRetry={message.onRetry}
-              />
-            )}
-            <Button
-              type="submit"
-              size="lg"
-              fullWidth
-              disabled={!image || isLoading}
-            >
-              {isLoading ? (
-                'Wird analysiert …'
-              ) : (
-                <>
+          </div>
+
+          {/* aria-live: screen readers announce the loading view and messages */}
+          <div className={styles.side} aria-live="polite">
+            {isLoading ? (
+              <LoadingState />
+            ) : (
+              <>
+                <DescriptionInput
+                  value={description}
+                  onChange={onDescriptionChange}
+                />
+                {message && (
+                  <ErrorMessage
+                    message={message.text}
+                    tone={message.tone}
+                    onRetry={message.onRetry}
+                  />
+                )}
+                <Button type="submit" size="lg" fullWidth disabled={!image}>
                   Rezept erstellen
-                  <IconArrowRight size={18} />
-                </>
-              )}
-            </Button>
-            {/* GDPR: short notice before the upload, details on the /datenschutz page */}
-            <p className={styles.privacy}>
-              Dein Foto wird nicht gespeichert. Bitte keine Fotos mit Personen
-              oder privaten Daten hochladen.
-            </p>
-          </form>
-
-          <ExampleImages onSelect={onExampleSelect} disabled={isLoading} />
-        </div>
-
-        {/* aria-live: screen readers announce when the loading state appears */}
-        <div className={styles.aside} aria-live="polite">
-          {isLoading ? (
-            <LoadingState />
-          ) : (
-            <div className={styles.heroPreview}>
-              <HeroPreview imageSrc="/hero.jpg" />
-            </div>
-          )}
-        </div>
+                </Button>
+                {/* GDPR: short notice before the upload, details on the /datenschutz page */}
+                <p className={styles.privacy}>
+                  Dein Foto wird nicht gespeichert. Bitte keine Fotos mit
+                  Personen oder privaten Daten hochladen.
+                </p>
+              </>
+            )}
+          </div>
+        </form>
       </section>
 
-      <HowItWorks />
+      <HowItWorks onRecipeSelect={onRecipeSelect} />
     </>
   )
 }

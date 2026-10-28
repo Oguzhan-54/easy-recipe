@@ -4,6 +4,22 @@
   padding: var(--space-md) var(--gutter) var(--space-xl);
 }
 
+/* Plain text link with arrow (like "Zurück zu EasyRecipe" on the legal pages) */
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+  color: var(--color-primary-hover);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
 .top {
   display: grid;
   gap: var(--space-lg);
@@ -45,7 +61,7 @@
   align-items: center;
   gap: 0.375rem;
   padding: 0.5rem 0.75rem;
-  border: 1px solid #d9d5c8;
+  border: 1px solid var(--color-border);
   border-radius: 999px;
   background-color: var(--color-surface);
   font-size: 0.875rem;
@@ -65,8 +81,7 @@
   gap: var(--space-lg);
 }
 
-.notes,
-.disclaimer {
+.notes {
   margin: var(--space-lg) 0 0;
   font-size: 0.875rem;
   color: var(--color-text-muted);

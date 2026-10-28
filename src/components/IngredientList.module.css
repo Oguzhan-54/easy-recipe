@@ -66,8 +66,18 @@
   background-repeat: no-repeat;
 }
 
-/* Checked ingredients are crossed out ("+" = the element right after the checkbox) */
-.checkbox:checked + .text {
+/* Right-aligned with equal-width digits, so "800 g" and "2" line up */
+.amount {
+  flex-shrink: 0;
+  min-width: 4.5rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+/* Checked ingredients are crossed out ("~" = the elements after the checkbox) */
+.checkbox:checked ~ .amount,
+.checkbox:checked ~ .text {
   color: var(--color-text-muted);
   text-decoration: line-through;
 }

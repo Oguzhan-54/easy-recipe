@@ -8,11 +8,22 @@ import { scaleIngredients } from '../lib/scaleIngredients.js'
 import IngredientList from './IngredientList.jsx'
 import ResultActions from './ResultActions.jsx'
 import StepList from './StepList.jsx'
-import { IconClock, IconDifficulty, IconUsers } from './icons.jsx'
+import {
+  IconArrowLeft,
+  IconClock,
+  IconDifficulty,
+  IconUsers,
+} from './icons.jsx'
 import styles from './ResultView.module.css'
 
 // Result page: photo + summary at the top, ingredients and steps below.
-function ResultView({ recipe: originalRecipe, previewUrl, onNewPhoto }) {
+// isReadyMade: a recipe from the recipe list (not an upload) → "Zurück zu den Rezepten" link.
+function ResultView({
+  recipe: originalRecipe,
+  previewUrl,
+  isReadyMade,
+  onNewPhoto,
+}) {
   // Chosen servings; starts with the AI's estimate. A new photo unmounts this view, so it resets.
   const [chosenServings, setChosenServings] = useState(originalRecipe.servings)
   // Everything below (chips, ingredients, copy text) uses the scaled recipe
@@ -32,11 +43,17 @@ function ResultView({ recipe: originalRecipe, previewUrl, onNewPhoto }) {
 
   return (
     <div className={styles.page}>
+      {isReadyMade && (
+        <a href="/rezepte" className={styles.back}>
+          <IconArrowLeft size={16} />
+          Zurück zu den Rezepten
+        </a>
+      )}
       <section className={styles.top}>
         {previewUrl && (
           <img
             src={previewUrl}
-            alt="Dein hochgeladenes Foto"
+            alt={isReadyMade ? recipe.dishName : 'Dein hochgeladenes Foto'}
             className={styles.photo}
           />
         )}
@@ -92,10 +109,6 @@ function ResultView({ recipe: originalRecipe, previewUrl, onNewPhoto }) {
           <strong>Hinweis:</strong> {recipe.notes}
         </p>
       )}
-      <p className={styles.disclaimer}>
-        Per KI aus deinem Foto erstellt. Mengen und Zeiten sind Schätzungen,
-        passe sie nach Geschmack an.
-      </p>
     </div>
   )
 }

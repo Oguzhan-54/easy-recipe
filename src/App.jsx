@@ -3,18 +3,24 @@ import Footer from './components/Footer.jsx'
 import Header from './components/Header.jsx'
 import ImprintPage from './components/ImprintPage.jsx'
 import PrivacyPage from './components/PrivacyPage.jsx'
+import RecipesPage from './components/RecipesPage.jsx'
 import ResultView from './components/ResultView.jsx'
 import StartView from './components/StartView.jsx'
 import { useAnalyzeImage } from './hooks/useAnalyzeImage.js'
 import { resizeImage, validateImageFile } from './lib/resizeImage.js'
 
-// Separate URLs for the legal pages. vercel.json sends both paths to index.html,
+// Separate URLs for the extra pages. vercel.json sends these paths to index.html,
 // so we pick the page here instead of using a router library.
-const LEGAL_PAGES = { '/impressum': ImprintPage, '/datenschutz': PrivacyPage }
+const PAGES = {
+  '/impressum': ImprintPage,
+  '/datenschutz': PrivacyPage,
+  '/rezepte': RecipesPage,
+}
 
 function App() {
-  const LegalPageView = LEGAL_PAGES[window.location.pathname]
-  // The already resized image: { base64, mimeType, previewUrl }
+  const PageView = PAGES[window.location.pathname]
+  // The already resized image: { base64, mimeType, previewUrl },
+  // or for a ready-made recipe: { previewUrl, isReadyMade: true }
   const [image, setImage] = useState(null)
   const [uploadError, setUploadError] = useState(null)
   const [description, setDescription] = useState('')
@@ -49,11 +55,11 @@ function App() {
     }
   }
 
-  // Example photo: preview + stored recipe, no AI request (demo mode)
-  function handleExampleSelect(example) {
+  // Ready-made recipe: photo + stored recipe, no AI request
+  function handleRecipeSelect(example) {
     setUploadError(null)
     setDescription('')
-    setImage({ previewUrl: example.imageSrc })
+    setImage({ previewUrl: example.imageSrc, isReadyMade: true })
     showDemo(example.recipe)
   }
 
@@ -72,6 +78,11 @@ function App() {
 
   // Back to an empty start page
   function handleNewPhoto() {
+    // Opened from another page (e.g. /rezepte): the upload card only exists on the start page
+    if (window.location.pathname !== '/') {
+      window.location.assign('/#hochladen')
+      return
+    }
     setImage(null)
     setDescription('')
     setUploadError(null)
@@ -99,19 +110,20 @@ function App() {
     <>
       <Header onNewPhoto={showResult ? handleNewPhoto : undefined} />
       <main>
-        {LegalPageView ? (
-          <LegalPageView />
-        ) : showResult ? (
+        {showResult ? (
           <ResultView
             recipe={result}
             previewUrl={image?.previewUrl}
+            isReadyMade={image?.isReadyMade}
             onNewPhoto={handleNewPhoto}
           />
+        ) : PageView ? (
+          <PageView onSelect={handleRecipeSelect} />
         ) : (
           <StartView
             image={image}
             onFileSelect={handleFileSelect}
-            onExampleSelect={handleExampleSelect}
+            onRecipeSelect={handleRecipeSelect}
             onClearImage={handleClearImage}
             description={description}
             onDescriptionChange={setDescription}

@@ -1,0 +1,99 @@
+{
+  "id": "curry",
+  "imageSrc": "/recipes/curry.jpg",
+  "photoCredit": "Kalindu Waranga on Unsplash",
+  "recipe": {
+    "isFood": true,
+    "dishName": "Hähnchen-Curry (Murgh Curry)",
+    "confidence": "high",
+    "description": "Ein aromatisches und würziges indisches Hähnchen-Curry mit einer reichhaltigen Sauce auf Tomaten- und Zwiebelbasis.",
+    "servings": 4,
+    "durationMinutes": 45,
+    "difficulty": "medium",
+    "ingredients": [
+      {
+        "name": "Hähnchenteile (z.B. Keulen und Brust)",
+        "amount": 800,
+        "unit": "g"
+      },
+      {
+        "name": "Zwiebeln",
+        "amount": 2,
+        "unit": "Stück"
+      },
+      {
+        "name": "Tomaten",
+        "amount": 3,
+        "unit": "Stück"
+      },
+      {
+        "name": "Knoblauch",
+        "amount": 3,
+        "unit": "Zehen"
+      },
+      {
+        "name": "Ingwer",
+        "amount": 2,
+        "unit": "cm"
+      },
+      {
+        "name": "Pflanzenöl",
+        "amount": 3,
+        "unit": "EL"
+      },
+      {
+        "name": "Currypulver",
+        "amount": 2,
+        "unit": "TL"
+      },
+      {
+        "name": "Kurkuma",
+        "amount": 1,
+        "unit": "TL"
+      },
+      {
+        "name": "Garam Masala",
+        "amount": 1,
+        "unit": "TL"
+      },
+      {
+        "name": "Salz",
+        "amount": null,
+        "unit": "nach Geschmack"
+      },
+      {
+        "name": "Wasser",
+        "amount": 250,
+        "unit": "ml"
+      }
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Zutaten vorbereiten",
+        "text": "Zwiebeln, Tomaten, Knoblauch und Ingwer fein hacken oder pürieren, um eine Pastenbasis zu erhalten."
+      },
+      {
+        "number": 2,
+        "title": "Hähnchen anbraten",
+        "text": "Öl in einem Topf erhitzen und die Hähnchenteile darin von allen Seiten scharf anbraten, dann herausnehmen."
+      },
+      {
+        "number": 3,
+        "title": "Gewürze anrösten",
+        "text": "Im gleichen Öl die Zwiebeln, Knoblauch und Ingwer goldbraun anbraten. Die Gewürze (Curry, Kurkuma) hinzufügen und kurz mitrösten."
+      },
+      {
+        "number": 4,
+        "title": "Sauce köcheln lassen",
+        "text": "Die Tomaten und etwas Wasser hinzufügen. Die Sauce köcheln lassen, bis sich das Öl leicht absetzt."
+      },
+      {
+        "number": 5,
+        "title": "Hähnchen garziehen",
+        "text": "Das Hähnchen zurück in die Sauce geben, abdecken und bei mittlerer Hitze ca. 25-30 Minuten garen, bis das Fleisch zart ist. Mit Garam Masala verfeinern."
+      }
+    ],
+    "notes": "Ein klassisches, herzhaftes Gericht, das hervorragend zu Reis oder Naan-Brot passt."
+  }
+}

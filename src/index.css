@@ -52,20 +52,23 @@
 }
 
 :root {
-  /* Colors from the design */
-  --color-bg: #f8f7f2;
+  /* Kitchen palette: rosemary (primary), basil (hover), saffron (accent), tomato (error), flour (bg) */
+  --color-bg: #fafaf7;
   --color-surface: #ffffff;
   --color-text: #1b2a22;
   --color-text-muted: #5b6660;
-  --color-primary: #2e7d50;
-  --color-primary-hover: #246640;
-  --color-primary-soft: #eef5f0;
-  --color-primary-border: #86ad95;
-  --color-accent-soft: #fde4d7;
-  --color-accent-text: #9a3c12;
-  --color-border: #e8e4d9;
-  --color-error: #b42318;
-  --color-error-soft: #fef3f2;
+  --color-primary: #1f4a33;
+  --color-primary-hover: #2e7d50;
+  --color-primary-soft: #edf3ef;
+  --color-primary-border: #8fb09c;
+  --color-accent: #f2b33d;
+  --color-accent-soft: #fcebc4;
+  --color-accent-text: #6e4600;
+  --color-border: #e6e6e0;
+  --color-disabled: #e3e4df;
+  --color-disabled-text: #4f5752;
+  --color-error: #b33a23;
+  --color-error-soft: #fbede9;
   --color-focus: #1b2a22;
 
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;

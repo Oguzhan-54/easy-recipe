@@ -1,0 +1,103 @@
+{
+  "id": "linsensuppe",
+  "imageSrc": "/recipes/linsensuppe.jpg",
+  "recipe": {
+    "isFood": true,
+    "dishName": "Rote Linsensuppe",
+    "confidence": "high",
+    "description": "Eine samtige, wärmende Suppe aus roten Linsen mit Kreuzkümmel und einem Spritzer Zitrone, garniert mit frischem Koriander.",
+    "servings": 4,
+    "durationMinutes": 35,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "name": "Rote Linsen",
+        "amount": 250,
+        "unit": "g"
+      },
+      {
+        "name": "Zwiebel",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Karotte",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Knoblauchzehen",
+        "amount": 2,
+        "unit": "Stück"
+      },
+      {
+        "name": "Tomatenmark",
+        "amount": 1,
+        "unit": "EL"
+      },
+      {
+        "name": "Gemüsebrühe",
+        "amount": 1.2,
+        "unit": "l"
+      },
+      {
+        "name": "Olivenöl",
+        "amount": 2,
+        "unit": "EL"
+      },
+      {
+        "name": "Kreuzkümmel, gemahlen",
+        "amount": 1,
+        "unit": "TL"
+      },
+      {
+        "name": "Paprikapulver, edelsüß",
+        "amount": 1,
+        "unit": "TL"
+      },
+      {
+        "name": "Zitrone",
+        "amount": 0.5,
+        "unit": "Stück"
+      },
+      {
+        "name": "Frischer Koriander",
+        "amount": null,
+        "unit": "zum Garnieren"
+      },
+      {
+        "name": "Salz und Pfeffer",
+        "amount": null,
+        "unit": "nach Geschmack"
+      }
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Gemüse schneiden",
+        "text": "Zwiebel, Karotte und Knoblauch schälen und klein würfeln. Die Linsen in einem Sieb kalt abspülen."
+      },
+      {
+        "number": 2,
+        "title": "Anschwitzen",
+        "text": "Olivenöl in einem Topf erhitzen. Zwiebel und Karotte 5 Minuten anschwitzen, dann Knoblauch, Tomatenmark, Kreuzkümmel und Paprika kurz mitrösten."
+      },
+      {
+        "number": 3,
+        "title": "Linsen kochen",
+        "text": "Linsen und Gemüsebrühe dazugeben, aufkochen und zugedeckt etwa 20 Minuten köcheln lassen, bis die Linsen weich zerfallen."
+      },
+      {
+        "number": 4,
+        "title": "Pürieren",
+        "text": "Die Suppe mit dem Stabmixer fein pürieren. Ist sie zu dick, etwas Wasser oder Brühe einrühren."
+      },
+      {
+        "number": 5,
+        "title": "Abschmecken",
+        "text": "Mit Zitronensaft, Salz und Pfeffer abschmecken. In Teller füllen und mit Korianderblättern garnieren."
+      }
+    ],
+    "notes": null
+  }
+}

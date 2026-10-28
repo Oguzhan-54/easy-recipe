@@ -1,0 +1,10 @@
+.page {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-xl) var(--gutter) var(--space-2xl);
+}
+
+.title {
+  margin: 0 0 var(--space-lg);
+  font-size: clamp(2rem, 7vw, 2.75rem);
+}

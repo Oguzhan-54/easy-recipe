@@ -87,15 +87,6 @@ export function IconCheck(props) {
   )
 }
 
-export function IconArrowRight(props) {
-  return (
-    <Icon {...props}>
-      <path d="M5 12h14" />
-      <path d="m13 6 6 6-6 6" />
-    </Icon>
-  )
-}
-
 export function IconArrowLeft(props) {
   return (
     <Icon {...props}>
