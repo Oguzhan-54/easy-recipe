@@ -1,8 +1,9 @@
 import { analyzeDish } from './_lib/gemini.js'
 import { analyzeDishMock, getMockMode } from './_lib/mockAi.js'
+import { validateAnalyzeRequest } from './_lib/validateRequest.js'
 
 // POST /api/analyze  –  body: { image, mimeType, description }
-// Full input validation, rate limiting and error codes follow in phase 5.
+// Only POST is exported, so Vercel answers other methods with 405 itself.
 export async function POST(request) {
   let body
   try {
@@ -15,17 +16,19 @@ export async function POST(request) {
     )
   }
 
-  const { image, mimeType, description = '' } = body
-  if (!image || !mimeType) {
-    return errorResponse(400, 'MISSING_IMAGE', 'Bitte ein Bild mitschicken.')
+  const validationError = validateAnalyzeRequest(body)
+  if (validationError) {
+    return errorResponse(400, validationError.code, validationError.message)
   }
+
+  const { image, mimeType, description = '' } = body
 
   try {
     // In mock mode (local development) a stored answer is returned instead of calling Gemini
     const mockMode = getMockMode()
     const recipe = mockMode
       ? await analyzeDishMock(mockMode)
-      : await analyzeDish({ image, mimeType, description })
+      : await analyzeDish({ image, mimeType, description: description.trim() })
     return Response.json(recipe)
   } catch (error) {
     // Only log the error message – never the image or the full request
