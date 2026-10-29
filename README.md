@@ -21,7 +21,8 @@ Foto von einem Gericht hochladen und ein Rezept bekommen: Die KI erkennt das Ger
 
 ## Datenschutz
 
-- Eigene Fotos werden zur Analyse an die Gemini API von Google übertragen. Im kostenlosen Tarif kann Google Eingaben zur Verbesserung seiner Dienste nutzen. Deshalb weist die App vor dem Upload darauf hin, keine Fotos mit Personen oder privaten Daten hochzuladen.
+- Eigene Fotos werden zur Analyse an Cloudflare Workers AI (Modell Mistral Small 3.1) übertragen. Cloudflare speichert Ein- und Ausgaben nicht und trainiert keine Modelle damit. Nur wenn Cloudflare gestört ist, springt ersatzweise die Gemini API von Google ein.
+- Die App weist vor dem Upload darauf hin, keine Fotos mit Personen oder privaten Daten hochzuladen.
 - EasyRecipe speichert keine Fotos und loggt weder Bilder noch Anfragen.
 - Für das Rate-Limit wird die IP-Adresse bei Upstash (Frankfurt) gespeichert und nach spätestens zwei Stunden automatisch gelöscht.
 - Keine Cookies, kein Tracking. Schriften und Bilder werden selbst gehostet.
@@ -32,7 +33,7 @@ Details stehen auf der Seite [/datenschutz](https://easy-recipe-sand.vercel.app/
 
 - Mengen und Zeiten sind Schätzungen aus einem Foto und keine exakten Rezeptangaben.
 - Gerichte können falsch erkannt werden, besonders bei ähnlich aussehendem Essen oder schlechtem Licht. Die KI gibt dann eine niedrigere Sicherheit an.
-- Das kostenlose Kontingent von Gemini ist begrenzt. An vollen Tagen helfen die Beispielbilder.
+- Das kostenlose Kontingent von Cloudflare Workers AI ist begrenzt (10.000 Neurons pro Tag, reicht für etwa 80 Analysen). An vollen Tagen helfen die Beispielbilder.
 - Das Rate-Limit gilt pro IP. Mehrere Personen im selben Netz (z. B. Firmen-WLAN) teilen sich ihr Limit.
 
 ## Ausblick
