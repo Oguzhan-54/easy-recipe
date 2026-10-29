@@ -4,7 +4,13 @@ import styles from './IngredientList.module.css'
 
 // Ingredient card with checkboxes, so it can be used as a shopping list.
 // The amounts come in already scaled to the chosen servings (see ResultView).
-function IngredientList({ ingredients, servings, onServingsChange }) {
+// isEstimated: amounts come from the AI looking at a photo, not from a ready-made recipe.
+function IngredientList({
+  ingredients,
+  servings,
+  onServingsChange,
+  isEstimated,
+}) {
   return (
     <section className={styles.card} aria-labelledby="ingredients-heading">
       <div className={styles.header}>
@@ -15,6 +21,9 @@ function IngredientList({ ingredients, servings, onServingsChange }) {
           <ServingsControl servings={servings} onChange={onServingsChange} />
         )}
       </div>
+      {isEstimated && (
+        <p className={styles.estimate}>Mengen geschätzt anhand des Bildes.</p>
+      )}
       <p className={styles.hint}>Hake beim Einkaufen ab.</p>
 
       <ul className={styles.list}>
