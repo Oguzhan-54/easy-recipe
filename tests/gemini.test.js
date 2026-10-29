@@ -8,8 +8,9 @@ vi.mock('@google/genai', () => ({
   },
 }))
 
-const { AiQuotaError, analyzeDish, isValidRecipe } =
-  await import('../api/_lib/gemini.js')
+const { analyzeDish } = await import('../api/_lib/gemini.js')
+const { AiQuotaError, isValidRecipe } =
+  await import('../api/_lib/recipeSchema.js')
 
 const recipe = {
   isFood: true,
@@ -101,5 +102,12 @@ describe('isValidRecipe', () => {
     expect(isValidRecipe(textAmount)).toBe(false)
     expect(isValidRecipe({ ...recipe, steps: [] })).toBe(false)
     expect(isValidRecipe(null)).toBe(false)
+  })
+
+  it('rejects servings as text or zero, accepts missing servings', () => {
+    expect(isValidRecipe({ ...recipe, servings: '2' })).toBe(false)
+    expect(isValidRecipe({ ...recipe, servings: 0 })).toBe(false)
+    expect(isValidRecipe({ ...recipe, servings: 2 })).toBe(true)
+    expect(isValidRecipe({ ...recipe, servings: null })).toBe(true)
   })
 })

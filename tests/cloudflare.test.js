@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 const { analyzeDishCloudflare } = await import('../api/_lib/cloudflare.js')
-const { AiQuotaError } = await import('../api/_lib/gemini.js')
+const { AiQuotaError } = await import('../api/_lib/recipeSchema.js')
 
 const recipe = {
   isFood: true,
@@ -41,6 +41,11 @@ describe('analyzeDishCloudflare', () => {
     expect(body.messages[1].content[1].image_url.url).toBe(
       'data:image/jpeg;base64,aGVsbG8=',
     )
+  })
+
+  it('finds the JSON when the model writes a sentence before it', async () => {
+    answer('Hier ist das Rezept:\n```json\n' + JSON.stringify(recipe) + '\n```')
+    await expect(analyzeDishCloudflare(input)).resolves.toEqual(recipe)
   })
 
   it('throws AiQuotaError on 429', async () => {

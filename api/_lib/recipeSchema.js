@@ -1,4 +1,4 @@
-// JSON schema for the AI answer (see CLAUDE.md, section 6).
+// JSON schema for the AI answer (see CLAUDE.md, section 6), plus the check of the answer.
 // Gemini gets it as a forced schema, Cloudflare as text in the prompt (see cloudflare.js).
 export const recipeSchema = {
   type: 'object',
@@ -56,4 +56,31 @@ export const recipeSchema = {
     'steps',
     'notes',
   ],
+}
+
+// Thrown when the AI answers 429 (rate limit or daily quota used up)
+export class AiQuotaError extends Error {}
+
+// Gemini is forced into the schema, Cloudflare is not – so check what the frontend relies on
+export function isValidRecipe(recipe) {
+  if (typeof recipe?.isFood !== 'boolean') return false
+  // No food: the frontend only shows a message, the other fields are not used
+  if (!recipe.isFood) return true
+
+  return (
+    typeof recipe.dishName === 'string' &&
+    // Text like "2" would break the servings buttons ("2" + 1 = "21")
+    (recipe.servings == null ||
+      (Number.isInteger(recipe.servings) && recipe.servings > 0)) &&
+    Array.isArray(recipe.ingredients) &&
+    recipe.ingredients.every(
+      (ingredient) =>
+        typeof ingredient?.name === 'string' &&
+        // A number, so the servings can be scaled (null = "a pinch of" etc.)
+        (ingredient.amount === null || Number.isFinite(ingredient.amount)),
+    ) &&
+    Array.isArray(recipe.steps) &&
+    recipe.steps.length > 0 &&
+    recipe.steps.every((step) => typeof step?.text === 'string')
+  )
 }

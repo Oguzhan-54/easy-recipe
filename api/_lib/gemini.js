@@ -1,5 +1,5 @@
 import { GoogleGenAI } from '@google/genai'
-import { recipeSchema } from './recipeSchema.js'
+import { AiQuotaError, isValidRecipe, recipeSchema } from './recipeSchema.js'
 import { systemPrompt } from './systemPrompt.js'
 
 // Models in order of preference (checked in the Gemini docs, Oct 2026). Every model has its own
@@ -8,7 +8,7 @@ import { systemPrompt } from './systemPrompt.js'
 const FALLBACK_MODELS = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite']
 const DEFAULT_MODEL = 'gemini-3.6-flash'
 const TIMEOUT_MS = 25_000
-// Runs after a failed Cloudflare attempt (up to 25 s), both together must finish before the frontend gives up (60 s)
+// Runs after a failed Cloudflare attempt (up to 25 s), both together must finish before the frontend gives up (70 s)
 const TOTAL_TIME_BUDGET_MS = 30_000
 // Short pause before trying the same model again (it is often only briefly overloaded)
 const RETRY_DELAY_MS = 1500
@@ -19,8 +19,6 @@ const ATTEMPTS_PER_MODEL = 2
 const THINKING_LEVEL = 'low'
 const MAX_OUTPUT_TOKENS = 4096
 
-// Thrown when every model answered 429 (rate limit or daily quota used up)
-export class AiQuotaError extends Error {}
 // The model answered, but not with a usable recipe (cut off, broken JSON, missing fields)
 class InvalidResponseError extends Error {}
 
@@ -83,7 +81,7 @@ function buildInput({ image, mimeType, description }) {
     // Clearly marked as user info, so the model does not treat it as an instruction
     input.push({
       type: 'text',
-      text: `Beschreibung des Nutzers: """${description}"""`,
+      text: `Notiz des Nutzers: """${description}"""`,
     })
   }
   return input
@@ -130,27 +128,6 @@ async function requestRecipe(client, model, input, timeLeft) {
     throw new InvalidResponseError('Gemini response misses required fields')
   }
   return recipe
-}
-
-// The schema forces the structure, but we still check what the frontend relies on
-export function isValidRecipe(recipe) {
-  if (typeof recipe?.isFood !== 'boolean') return false
-  // No food: the frontend only shows a message, the other fields are not used
-  if (!recipe.isFood) return true
-
-  return (
-    typeof recipe.dishName === 'string' &&
-    Array.isArray(recipe.ingredients) &&
-    recipe.ingredients.every(
-      (ingredient) =>
-        typeof ingredient?.name === 'string' &&
-        // A number, so the servings can be scaled (null = "a pinch of" etc.)
-        (ingredient.amount === null || Number.isFinite(ingredient.amount)),
-    ) &&
-    Array.isArray(recipe.steps) &&
-    recipe.steps.length > 0 &&
-    recipe.steps.every((step) => typeof step?.text === 'string')
-  )
 }
 
 function wait(ms) {

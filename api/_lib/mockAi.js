@@ -18,7 +18,7 @@ export function getMockMode() {
   return MOCK_MODES.includes(mode) ? mode : 'recipe'
 }
 
-// Same signature as analyzeDish() in gemini.js, so analyze.js can use both the same way
+// Returns a recipe like the real AI modules, so analyze.js can use it the same way
 export async function analyzeDishMock(mode) {
   await new Promise((resolve) => setTimeout(resolve, MOCK_DELAY_MS))
 

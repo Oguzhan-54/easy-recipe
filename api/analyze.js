@@ -1,7 +1,8 @@
 import { analyzeDishCloudflare } from './_lib/cloudflare.js'
-import { AiQuotaError, analyzeDish } from './_lib/gemini.js'
+import { analyzeDish } from './_lib/gemini.js'
 import { analyzeDishMock, getMockMode } from './_lib/mockAi.js'
 import { checkRateLimit } from './_lib/rateLimit.js'
+import { AiQuotaError } from './_lib/recipeSchema.js'
 import { validateAnalyzeRequest } from './_lib/validateRequest.js'
 
 // POST /api/analyze  –  body: { image, mimeType, description }
