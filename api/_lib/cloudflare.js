@@ -1,5 +1,4 @@
-import { AiQuotaError, isValidRecipe } from './gemini.js'
-import { recipeSchema } from './recipeSchema.js'
+import { AiQuotaError, isValidRecipe, recipeSchema } from './recipeSchema.js'
 import { systemPrompt } from './systemPrompt.js'
 
 // Main AI: Cloudflare Workers AI (checked in the Cloudflare docs, Oct 2026).
@@ -11,8 +10,6 @@ const MAX_TOKENS = 2048
 // Forced JSON (guided_json / response_format) does not work with this model: it is ignored or
 // the model only produces spaces. So the schema goes into the prompt and the answer is checked.
 const instructions = `${systemPrompt}\n\nJSON-Schema der Antwort:\n${JSON.stringify(recipeSchema)}`
-// The model wraps its JSON in a Markdown code block (```json ... ```)
-const CODE_FENCE = /^\s*```(json)?\s*|\s*```\s*$/g
 
 // Sends the image (and optional description) to Cloudflare and returns the parsed recipe object.
 // One attempt only: if it fails, analyze.js falls back to Gemini.
@@ -28,7 +25,7 @@ export async function analyzeDishCloudflare({ image, mimeType, description }) {
     // Clearly marked as user info, so the model does not treat it as an instruction
     content.push({
       type: 'text',
-      text: `Beschreibung des Nutzers: """${description}"""`,
+      text: `Notiz des Nutzers: """${description}"""`,
     })
   }
 
@@ -63,7 +60,11 @@ export async function analyzeDishCloudflare({ image, mimeType, description }) {
   let recipe
   try {
     const { result } = await response.json()
-    recipe = JSON.parse(result.response.replace(CODE_FENCE, ''))
+    // The model wraps its JSON in a Markdown code block, sometimes with a sentence before it
+    const text = result.response
+    recipe = JSON.parse(
+      text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1),
+    )
   } catch {
     // Also happens when the answer was cut off at MAX_TOKENS
     throw new Error('Cloudflare response is not valid JSON')

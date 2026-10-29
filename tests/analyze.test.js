@@ -10,7 +10,8 @@ vi.mock('../api/_lib/rateLimit.js', () => ({ checkRateLimit: vi.fn() }))
 
 const { POST } = await import('../api/analyze.js')
 const { analyzeDishCloudflare } = await import('../api/_lib/cloudflare.js')
-const { AiQuotaError, analyzeDish } = await import('../api/_lib/gemini.js')
+const { analyzeDish } = await import('../api/_lib/gemini.js')
+const { AiQuotaError } = await import('../api/_lib/recipeSchema.js')
 const { checkRateLimit } = await import('../api/_lib/rateLimit.js')
 
 const validBody = { image: 'aGVsbG8=', mimeType: 'image/jpeg', description: '' }
