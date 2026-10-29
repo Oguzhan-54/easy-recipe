@@ -5,9 +5,11 @@ vi.mock('../api/_lib/gemini.js', async (importOriginal) => ({
   ...(await importOriginal()),
   analyzeDish: vi.fn(),
 }))
+vi.mock('../api/_lib/cloudflare.js', () => ({ analyzeDishCloudflare: vi.fn() }))
 vi.mock('../api/_lib/rateLimit.js', () => ({ checkRateLimit: vi.fn() }))
 
 const { POST } = await import('../api/analyze.js')
+const { analyzeDishCloudflare } = await import('../api/_lib/cloudflare.js')
 const { AiQuotaError, analyzeDish } = await import('../api/_lib/gemini.js')
 const { checkRateLimit } = await import('../api/_lib/rateLimit.js')
 
@@ -26,7 +28,11 @@ function post(body) {
 describe('POST /api/analyze', () => {
   beforeEach(() => {
     vi.stubEnv('MOCK_AI', '')
+    vi.stubEnv('GEMINI_API_KEY', 'test-key')
     vi.spyOn(console, 'error').mockImplementation(() => {})
+    vi.spyOn(console, 'warn').mockImplementation(() => {})
+    // Default: Cloudflare fails, so the older tests below check the Gemini fallback
+    analyzeDishCloudflare.mockReset().mockRejectedValue(new Error('cf down'))
     analyzeDish.mockReset()
     checkRateLimit.mockReset().mockResolvedValue(null)
   })
@@ -37,6 +43,20 @@ describe('POST /api/analyze', () => {
     expect(response.status).toBe(200)
     expect(await response.json()).toEqual({ isFood: false })
     expect(checkRateLimit).toHaveBeenCalledWith('1.2.3.4')
+  })
+
+  it('uses Cloudflare first and skips Gemini when it works', async () => {
+    analyzeDishCloudflare.mockResolvedValue({ isFood: false })
+    const response = await post(validBody)
+    expect(await response.json()).toEqual({ isFood: false })
+    expect(analyzeDish).not.toHaveBeenCalled()
+  })
+
+  it('does not fall back to Gemini without an API key', async () => {
+    vi.stubEnv('GEMINI_API_KEY', '')
+    const response = await post(validBody)
+    expect(response.status).toBe(502)
+    expect(analyzeDish).not.toHaveBeenCalled()
   })
 
   it('rejects broken JSON and invalid input before the limit and the AI', async () => {

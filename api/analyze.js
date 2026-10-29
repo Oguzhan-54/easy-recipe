@@ -1,3 +1,4 @@
+import { analyzeDishCloudflare } from './_lib/cloudflare.js'
 import { AiQuotaError, analyzeDish } from './_lib/gemini.js'
 import { analyzeDishMock, getMockMode } from './_lib/mockAi.js'
 import { checkRateLimit } from './_lib/rateLimit.js'
@@ -32,15 +33,19 @@ export async function POST(request) {
   const { image, mimeType, description = '' } = body
 
   try {
-    // In mock mode (local development) a stored answer is returned instead of calling Gemini
+    // In mock mode (local development) a stored answer is returned instead of calling the AI
     const mockMode = getMockMode()
     const recipe = mockMode
       ? await analyzeDishMock(mockMode)
-      : await analyzeDish({ image, mimeType, description: description.trim() })
+      : await analyzeWithFallback({
+          image,
+          mimeType,
+          description: description.trim(),
+        })
     return Response.json(recipe)
   } catch (error) {
     // Only log the error message – never the image or the full request
-    console.error('Gemini request failed:', error.message)
+    console.error('AI request failed:', error.message)
     if (error instanceof AiQuotaError) {
       return errorResponse(
         429,
@@ -53,6 +58,18 @@ export async function POST(request) {
       'AI_FAILED',
       'Die Analyse ist fehlgeschlagen. Bitte versuche es erneut.',
     )
+  }
+}
+
+// Cloudflare first; if it fails, is too slow or answers nonsense, Gemini takes over.
+// Without GEMINI_API_KEY there is no fallback, so removing the key switches Gemini off.
+async function analyzeWithFallback(input) {
+  try {
+    return await analyzeDishCloudflare(input)
+  } catch (error) {
+    if (!process.env.GEMINI_API_KEY) throw error
+    console.warn('Cloudflare failed, falling back to Gemini:', error.message)
+    return analyzeDish(input)
   }
 }
 
