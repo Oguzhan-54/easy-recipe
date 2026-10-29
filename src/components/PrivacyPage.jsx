@@ -2,9 +2,10 @@ import { OWNER } from '../lib/siteInfo.js'
 import LegalPage from './LegalPage.jsx'
 
 // Privacy policy ("Datenschutzerklärung") with the information required by Art. 13 GDPR.
-// Researched Oct 2026 (provider terms of Vercel, Google Gemini API, Upstash); not legal advice.
-// Vercel and Upstash state DPF certification in their privacy policies; Google's DPF listing
-// was not verified – check dataprivacyframework.gov before going live.
+// Researched Oct 2026 (provider terms of Vercel, Cloudflare Workers AI, Google Gemini API, Upstash);
+// not legal advice. Vercel, Cloudflare and Upstash state DPF certification in their privacy policies;
+// Cloudflare's DPA (v6.4) is part of the Self-Serve Subscription Agreement, so it covers free accounts.
+// Google's DPF listing was not verified – check dataprivacyframework.gov before going live.
 // Update it whenever a new service, cookie or external resource is added.
 function PrivacyPage() {
   return (
@@ -41,8 +42,9 @@ function PrivacyPage() {
         </li>
         <li>
           Wenn du ein eigenes Foto analysieren lässt, wird es zusammen mit
-          deiner optionalen Notiz an die Gemini API von Google übertragen.
-          EasyRecipe selbst speichert weder Foto noch Notiz.
+          deiner optionalen Notiz an Cloudflare Workers AI übertragen (nur bei
+          einer Störung ersatzweise an Google Gemini). EasyRecipe selbst
+          speichert weder Foto noch Notiz.
         </li>
         <li>
           Für das Anfragelimit wird deine IP-Adresse höchstens etwa zwei Stunden
@@ -50,7 +52,7 @@ function PrivacyPage() {
         </li>
         <li>
           Die fertigen Rezepte auf der Startseite und unter „Rezepte“ senden
-          keine Daten an Google.
+          keine Daten an einen KI-Dienst.
         </li>
       </ul>
 
@@ -92,35 +94,51 @@ function PrivacyPage() {
         „Rezept kopieren“ legt das Rezept nur lokal in deiner Zwischenablage ab.
       </p>
 
-      <h2>5. Bildanalyse mit Google Gemini</h2>
+      <h2>5. Bildanalyse mit Cloudflare Workers AI und Google Gemini</h2>
       <p>
         Wenn du ein eigenes Foto hochlädst und auf „Rezept erstellen“ klickst,
         wird das Foto zuerst in deinem Browser verkleinert. Danach werden das
         verkleinerte Foto und deine optionale Notiz über die Serverfunktion von
-        EasyRecipe an die Gemini API übertragen. Anbieter ist die Google LLC,
-        1600 Amphitheatre Parkway, Mountain View, CA 94043, USA. Google erkennt
-        das Gericht und schickt ein Rezept zurück, das dir angezeigt wird.
+        EasyRecipe an einen KI-Dienst übertragen. Dieser erkennt das Gericht und
+        schickt ein Rezept zurück, das dir angezeigt wird.
       </p>
       <p>
         Zweck ist, dir die von dir angeforderte Rezepterkennung bereitzustellen.
         Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Nutzung der von dir
         angeforderten Funktion). Das Hochladen ist freiwillig. Ohne Foto kann
         kein Rezept erstellt werden, die fertigen Rezepte kannst du aber
-        jederzeit ohne Upload nutzen.
+        jederzeit ohne Upload nutzen. EasyRecipe speichert weder das Foto noch
+        die Notiz oder das erzeugte Rezept. Nach dem Schließen oder Neuladen der
+        Seite ist alles weg.
       </p>
       <p>
-        EasyRecipe speichert weder das Foto noch die Notiz oder das erzeugte
-        Rezept. Nach dem Schließen oder Neuladen der Seite ist alles weg. Google
-        verarbeitet die Anfrage nach den Gemini-API-Bedingungen für Nutzer im
-        Europäischen Wirtschaftsraum als Auftragsverarbeiter und verwendet
-        Fotos, Notizen und Antworten nicht, um seine Produkte oder KI-Modelle zu
-        verbessern. Google protokolliert Anfragen und Antworten für einen
-        begrenzten Zeitraum, ausschließlich um Missbrauch zu erkennen und
-        gesetzlichen Pflichten nachzukommen. Die Daten können dabei auch
-        außerhalb der EU verarbeitet werden, insbesondere in den USA. Grundlage
-        dafür sind das EU-US Data Privacy Framework (Art. 45 DSGVO) bzw. die
-        Standardvertragsklauseln der EU-Kommission (Art. 46 DSGVO), die Google
-        in seinem Auftragsverarbeitungsvertrag verwendet.
+        <strong>Cloudflare Workers AI (Standard):</strong> Anbieter ist die
+        Cloudflare, Inc., 101 Townsend St., San Francisco, CA 94107, USA. Die
+        Analyse läuft über das KI-Modell Mistral Small 3.1, das Cloudflare auf
+        eigenen Servern betreibt. Cloudflare verarbeitet Foto und Notiz nur so
+        lange, wie es für die Anfrage nötig ist, speichert sie danach nicht und
+        verwendet sie nicht, um KI-Modelle zu trainieren. Cloudflare handelt als
+        Auftragsverarbeiter auf Grundlage seines Auftragsverarbeitungsvertrags
+        (Data Processing Addendum). Die Anfrage kann in Rechenzentren außerhalb
+        der EU verarbeitet werden, insbesondere in den USA. Cloudflare ist unter
+        dem EU-US Data Privacy Framework zertifiziert (Art. 45 DSGVO) und nutzt
+        ergänzend Standardvertragsklauseln (Art. 46 DSGVO).
+      </p>
+      <p>
+        <strong>Google Gemini (nur ersatzweise):</strong> Nur wenn Cloudflare
+        gestört ist, zu lange braucht oder keine gültige Antwort liefert, wird
+        dieselbe Anfrage an die Gemini API der Google LLC, 1600 Amphitheatre
+        Parkway, Mountain View, CA 94043, USA, geschickt. Google verarbeitet die
+        Anfrage nach den Gemini-API-Bedingungen für Nutzer im Europäischen
+        Wirtschaftsraum als Auftragsverarbeiter und verwendet Fotos, Notizen und
+        Antworten nicht, um seine Produkte oder KI-Modelle zu verbessern. Google
+        protokolliert Anfragen und Antworten für einen begrenzten Zeitraum,
+        ausschließlich um Missbrauch zu erkennen und gesetzlichen Pflichten
+        nachzukommen. Die Daten können dabei auch außerhalb der EU verarbeitet
+        werden, insbesondere in den USA. Grundlage dafür sind das EU-US Data
+        Privacy Framework (Art. 45 DSGVO) bzw. die Standardvertragsklauseln der
+        EU-Kommission (Art. 46 DSGVO), die Google in seinem
+        Auftragsverarbeitungsvertrag verwendet.
       </p>
       <p>
         Bitte lade keine Fotos hoch, auf denen Personen, Gesichter, Kennzeichen,
@@ -162,9 +180,10 @@ function PrivacyPage() {
       <h2>8. Empfänger und Übermittlung in Drittländer</h2>
       <p>
         Empfänger deiner Daten sind ausschließlich die oben genannten
-        Dienstleister: Vercel Inc. (Hosting), Google LLC (Bildanalyse, nur bei
-        eigenem Upload) und Upstash, Inc. (Anfragelimit, nur bei eigenem
-        Upload). Alle drei haben ihren Sitz in den USA. Übermittlungen dorthin
+        Dienstleister: Vercel Inc. (Hosting), Cloudflare, Inc. (Bildanalyse, nur
+        bei eigenem Upload), Google LLC (Bildanalyse, nur ersatzweise bei einer
+        Störung von Cloudflare) und Upstash, Inc. (Anfragelimit, nur bei eigenem
+        Upload). Alle vier haben ihren Sitz in den USA. Übermittlungen dorthin
         stützen sich auf das EU-US Data Privacy Framework, für das ein
         Angemessenheitsbeschluss der EU-Kommission besteht (Art. 45 DSGVO), und
         ergänzend auf Standardvertragsklauseln (Art. 46 DSGVO). Darüber hinaus
@@ -182,7 +201,7 @@ function PrivacyPage() {
       <h2>10. Datensicherheit</h2>
       <p>
         Alle Verbindungen zu EasyRecipe sind per HTTPS (TLS) verschlüsselt. Der
-        Zugang zur Gemini API ist nur dem Server bekannt und nie im Browser
+        Zugang zu den KI-Diensten ist nur dem Server bekannt und nie im Browser
         sichtbar.
       </p>
 
