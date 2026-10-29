@@ -99,6 +99,7 @@ function ResultView({
             ingredients={recipe.ingredients}
             servings={recipe.servings}
             onServingsChange={setChosenServings}
+            isEstimated={!isReadyMade}
           />
         )}
         {recipe.steps.length > 0 && <StepList steps={recipe.steps} />}

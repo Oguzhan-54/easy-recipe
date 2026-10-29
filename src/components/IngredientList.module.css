@@ -18,6 +18,13 @@
   font-size: 1.75rem;
 }
 
+/* Shown on every screen size: users must know the amounts are a guess */
+.estimate {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
 /* Hint only on desktop, on mobile the space is needed for the list */
 .hint {
   display: none;

@@ -178,9 +178,9 @@ Der System-Prompt liegt im Backend, nicht im Frontend.
 
 ## 9. Datenschutz (DSGVO-Hinweis)
 
-- Hochgeladene Bilder werden zur Analyse an Google (Gemini API) übertragen.
-- Beim kostenlosen Gemini-Tarif können Eingaben laut Google-Bedingungen zur Verbesserung der Dienste
-  genutzt werden (aktuelle Bedingungen prüfen).
+- Hochgeladene Bilder werden zur Analyse an den KI-Anbieter übertragen (derzeit Google Gemini API).
+- Laut Gemini-Bedingungen dürfen öffentliche Apps für Nutzer im EWR nur den Bezahl-Tarif nutzen →
+  Umstieg auf Cloudflare Workers AI geplant (siehe `HANDOFF.md`). Datenschutzerklärung dann anpassen.
 - → Im UI einen kurzen, sichtbaren Hinweis neben dem Upload: keine Fotos mit Personen oder privaten Daten hochladen.
 - Im README unter "Datenschutz" erwähnen.
 
