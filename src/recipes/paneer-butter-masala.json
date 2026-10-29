@@ -1,0 +1,98 @@
+{
+  "id": "paneer-butter-masala",
+  "imageSrc": "/recipes/paneer-butter-masala.jpg",
+  "recipe": {
+    "isFood": true,
+    "dishName": "Paneer Butter Masala",
+    "confidence": "high",
+    "description": "Gebratene Paneer-Würfel in einer cremigen, mild-würzigen Tomaten-Butter-Sauce. Dazu passen Basmatireis und Naan.",
+    "servings": 4,
+    "durationMinutes": 35,
+    "difficulty": "easy",
+    "ingredients": [
+      {
+        "name": "Paneer",
+        "amount": 400,
+        "unit": "g"
+      },
+      {
+        "name": "Butter",
+        "amount": 50,
+        "unit": "g"
+      },
+      {
+        "name": "Zwiebel",
+        "amount": 1,
+        "unit": "Stück"
+      },
+      {
+        "name": "Knoblauchzehen",
+        "amount": 3,
+        "unit": "Stück"
+      },
+      {
+        "name": "Ingwer, frisch gerieben",
+        "amount": 1,
+        "unit": "EL"
+      },
+      {
+        "name": "Passierte Tomaten",
+        "amount": 400,
+        "unit": "g"
+      },
+      {
+        "name": "Sahne",
+        "amount": 150,
+        "unit": "ml"
+      },
+      {
+        "name": "Garam Masala",
+        "amount": 2,
+        "unit": "TL"
+      },
+      {
+        "name": "Paprikapulver, edelsüß",
+        "amount": 1,
+        "unit": "TL"
+      },
+      {
+        "name": "Kurkuma",
+        "amount": 0.5,
+        "unit": "TL"
+      },
+      {
+        "name": "Frischer Koriander",
+        "amount": 0.5,
+        "unit": "Bund"
+      },
+      {
+        "name": "Salz",
+        "amount": null,
+        "unit": "nach Geschmack"
+      }
+    ],
+    "steps": [
+      {
+        "number": 1,
+        "title": "Paneer anbraten",
+        "text": "Paneer in mundgerechte Würfel schneiden. Die Hälfte der Butter in einer großen Pfanne erhitzen und die Würfel darin rundherum leicht goldbraun braten. Herausnehmen und beiseitestellen."
+      },
+      {
+        "number": 2,
+        "title": "Sauce ansetzen",
+        "text": "Zwiebel fein würfeln und in der restlichen Butter glasig dünsten. Knoblauch und Ingwer dazugeben und 1 Minute mitbraten. Garam Masala, Paprika und Kurkuma kurz anrösten."
+      },
+      {
+        "number": 3,
+        "title": "Köcheln lassen",
+        "text": "Passierte Tomaten einrühren und 10 Minuten bei mittlerer Hitze köcheln lassen. Dann die Sahne unterrühren und mit Salz abschmecken."
+      },
+      {
+        "number": 4,
+        "title": "Fertigstellen",
+        "text": "Paneer in die Sauce geben und 3–4 Minuten darin warm ziehen lassen, nicht länger, sonst wird er zäh. Mit gehacktem Koriander bestreuen und mit Reis oder Naan servieren."
+      }
+    ],
+    "notes": "Mit Hähnchen statt Paneer wird daraus Butter Chicken: 600 g Hähnchenbrust in Joghurt und Garam Masala marinieren, anbraten und 10 Minuten in der Sauce gar ziehen lassen."
+  }
+}
