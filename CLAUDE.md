@@ -46,8 +46,9 @@ JavaScript, SQL, Git, wenig React-Praxis. **Ich will jeden Teil verstehen**, nic
 | Frontend | Vite + React (JavaScript) | schnell, verbreitet, passt zum Lernstand |
 | Styling | CSS Modules oder Tailwind (vorher kurz mit mir klären) | |
 | Backend | Vercel Serverless Functions im Ordner `/api` | API-Key bleibt serverseitig, kein eigener Server nötig |
-| KI | Google Gemini API, Free-Tier, offizielles SDK `@google/genai` | kostenlos, Vision-fähig, strukturierte Ausgabe |
-| Modell | aktuelles Gemini-**Flash**-Modell (Namen in den Docs prüfen) | schnell, günstig, reicht für Bilderkennung |
+| KI | Cloudflare Workers AI (Free-Tier, per `fetch`, kein SDK) | kostenlos ohne Kreditkarte, kein Training, keine Speicherung, Vision-fähig |
+| Modell | `@cf/mistralai/mistral-small-3.1-24b-instruct` | Bildverständnis, Apache-2.0-Lizenz (Llama-Modelle schließen EU-Entwickler aus) |
+| KI-Fallback | Google Gemini API (Flash-Modell, SDK `@google/genai`) | springt nur ein, wenn Cloudflare ausfällt; aus, wenn `GEMINI_API_KEY` fehlt |
 | Rate-Limit | Upstash Redis + `@upstash/ratelimit` (Free-Tier) | In-Memory-Limits funktionieren in Serverless nicht zuverlässig |
 | Tests | Vitest | leichtgewichtig, passt zu Vite |
 | Qualität | ESLint + Prettier | |
@@ -62,7 +63,8 @@ Lokale Entwicklung inkl. `/api`-Funktionen: `vercel dev`.
 ```
 easy-recipe/
 ├── api/
-│   └── analyze.js            # Serverless Function: Validierung, Rate-Limit, Gemini-Aufruf
+│   ├── analyze.js            # Serverless Function: Validierung, Rate-Limit, KI-Aufruf
+│   └── _lib/                 # cloudflare.js, gemini.js (Fallback), Schema, Prompt, Rate-Limit
 ├── src/
 │   ├── components/
 │   │   ├── ImageUpload.jsx   # Drag & Drop, Dateiauswahl, Vorschau
@@ -101,7 +103,8 @@ easy-recipe/
 4. Die Function:
    - validiert Eingaben (Typ, Größe, Beschreibungslänge)
    - prüft das Rate-Limit (pro IP + globales Tageslimit)
-   - ruft Gemini mit Bild, System-Prompt, Beschreibung und `responseSchema` auf
+   - ruft Cloudflare mit Bild, System-Prompt und Beschreibung auf (Timeout 25 s);
+     bei Fehler, Timeout oder ungültiger Antwort übernimmt Gemini (max. 30 s)
    - validiert die Antwort und gibt JSON zurück
 5. Frontend rendert Zutaten, Rezept und Schritte.
 
@@ -112,8 +115,9 @@ und verbrauchen kein Kontingent. Nur eigene Uploads gehen an die KI.
 
 ## 6. Antwortformat (JSON-Schema)
 
-Gemini muss strukturiert antworten (`responseMimeType: "application/json"` + `responseSchema`).
-Kein Fließtext.
+Die KI muss strukturiert antworten, kein Fließtext. Bei Cloudflare steht das Schema im Prompt
+(erzwungenes JSON funktioniert mit Mistral Small 3.1 nicht), die Antwort wird mit `isValidRecipe` geprüft.
+Gemini bekommt es als `responseSchema` (`responseMimeType: "application/json"`).
 
 ```json
 {
@@ -179,9 +183,10 @@ Der System-Prompt liegt im Backend, nicht im Frontend.
 
 ## 9. Datenschutz (DSGVO-Hinweis)
 
-- Hochgeladene Bilder werden zur Analyse an den KI-Anbieter übertragen (derzeit Google Gemini API).
-- Laut Gemini-Bedingungen dürfen öffentliche Apps für Nutzer im EWR nur den Bezahl-Tarif nutzen →
-  Umstieg auf Cloudflare Workers AI geplant (siehe `HANDOFF.md`). Datenschutzerklärung dann anpassen.
+- Hochgeladene Bilder werden zur Analyse an Cloudflare Workers AI übertragen, ersatzweise an Google Gemini.
+- Laut Gemini-Bedingungen dürfen öffentliche Apps für Nutzer im EWR nur den Bezahl-Tarif nutzen.
+  Deshalb ist Gemini nur Fallback; bewusst in Kauf genommen, weil die Seite kaum Besucher hat.
+- Neue Dienste oder Datenflüsse → `src/components/PrivacyPage.jsx` anpassen.
 - → Im UI einen kurzen, sichtbaren Hinweis neben dem Upload: keine Fotos mit Personen oder privaten Daten hochladen.
 - Im README unter "Datenschutz" erwähnen.
 
@@ -196,7 +201,7 @@ Jeder Fehlerfall bekommt eine verständliche Meldung im UI, keine rohen Fehlerte
 | falscher Dateityp / zu groß | Meldung direkt beim Upload, keine Anfrage |
 | kein Essen erkannt (`isFood: false`) | freundlicher Hinweis, neues Bild vorschlagen |
 | eigenes Rate-Limit (429) | "Limit erreicht, probier die Beispielbilder oder später nochmal" |
-| Gemini-Kontingent erschöpft | wie oben, Demo-Modus anbieten |
+| KI-Kontingent erschöpft (Cloudflare und Gemini) | wie oben, Demo-Modus anbieten |
 | Timeout / Netzwerkfehler | Meldung + "Erneut versuchen"-Button |
 | ungültige KI-Antwort | einmal serverseitig neu versuchen, danach Fehlermeldung |
 
