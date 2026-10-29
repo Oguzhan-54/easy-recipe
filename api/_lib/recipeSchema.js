@@ -1,5 +1,5 @@
-// JSON schema for the Gemini answer (see CLAUDE.md, section 6).
-// Gemini is forced to answer in exactly this structure, so we never get free text.
+// JSON schema for the AI answer (see CLAUDE.md, section 6).
+// Gemini gets it as a forced schema, Cloudflare as text in the prompt (see cloudflare.js).
 export const recipeSchema = {
   type: 'object',
   properties: {

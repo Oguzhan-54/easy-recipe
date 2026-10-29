@@ -8,8 +8,8 @@ import { systemPrompt } from './systemPrompt.js'
 const FALLBACK_MODELS = ['gemini-3.5-flash-lite', 'gemini-3.1-flash-lite']
 const DEFAULT_MODEL = 'gemini-3.6-flash'
 const TIMEOUT_MS = 25_000
-// All attempts together must finish before the frontend gives up (60 s)
-const TOTAL_TIME_BUDGET_MS = 50_000
+// Runs after a failed Cloudflare attempt (up to 25 s), both together must finish before the frontend gives up (60 s)
+const TOTAL_TIME_BUDGET_MS = 30_000
 // Short pause before trying the same model again (it is often only briefly overloaded)
 const RETRY_DELAY_MS = 1500
 const ATTEMPTS_PER_MODEL = 2

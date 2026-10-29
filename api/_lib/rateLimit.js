@@ -5,7 +5,7 @@ import { Redis } from '@upstash/redis'
 // Upstash Redis (an external key-value store) that every function instance shares.
 const REQUESTS_PER_IP = 5
 const IP_WINDOW = '1 h'
-const REQUESTS_PER_DAY = 100
+const REQUESTS_PER_DAY = 80
 
 let limiters = null
 

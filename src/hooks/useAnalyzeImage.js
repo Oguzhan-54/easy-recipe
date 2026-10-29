@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-// Longer than the backend needs for all Gemini attempts (50 s), so the backend can answer first
+// Longer than the backend needs for Cloudflare + all Gemini attempts (25 + 30 s), so the backend can answer first
 const REQUEST_TIMEOUT_MS = 60_000
 
 // Sends an image to /api/analyze and keeps track of the request state.

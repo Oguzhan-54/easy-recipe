@@ -1,4 +1,4 @@
-// System prompt for Gemini (see CLAUDE.md, section 7).
+// System prompt for the AI (see CLAUDE.md, section 7).
 // It lives in the backend, so users can neither see nor change it.
 export const systemPrompt = `
 Du bist ein erfahrener Koch, der Gerichte anhand von Fotos erkennt.

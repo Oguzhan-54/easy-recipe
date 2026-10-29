@@ -1,4 +1,4 @@
-// Mock mode for local development: returns stored answers instead of calling Gemini.
+// Mock mode for local development: returns stored answers instead of calling the AI.
 // Costs no quota, so the UI (loading state, recipe view, errors) can be tested as often as needed.
 //
 // Enable it in .env:
